@@ -8,6 +8,6 @@ Noticing
 We are often pushed to be as efficient as possible: get to the destination quickly, use tools to summarize the reading, skip to the point, rush to the finish. But when we slow down and pay attention, we notice small things that make us feel warm or happy—a sunset, a campus cat, a professor’s joke in the lecture notes, the careful design in a classmate’s website. These moments are easy to miss, but they are what make the journey meaningful. This website is about noticing them and appreciating the value of these small beauties.
 
 ## Sources
-- Photos by Ada, Vanessa, Erin, Sherry, and Talia. Used with permission.
+- Photos by Ada(Me), Vanessa(Yige Su), Erin(Ziruo Ren), Sherry(Wenxi Jiang), and Talia(Guowei Xie). Used with permission.
 - COMPSCI 231 Lecture Notes, Duke University: https://donaldlab.cs.duke.edu/Teaching/discretemath/F2026/lectures/l03-iteration-recursion-induction.txt
-- Sherry C., *Pre-internet Story*: https://sherryc929.github.io/Pre-internet-Story/
+- Sherry(Wenxi Jiang), *Pre-internet Story*: https://sherryc929.github.io/Pre-internet-Story/
