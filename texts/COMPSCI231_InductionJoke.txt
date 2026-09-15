@@ -1,0 +1,3 @@
+Title: The Pluto of Prime Numbers
+Caption: In the COMPSCI 231 notes, the professor jokes that "1 is the Pluto of Prime numbers." If your goal is to finish quickly by asking AI for a summary, you get the definitions and proofs—but not the joke. That small aside is a creative touch that reveals the professor's humor and makes the math feel human.
+Source: COMPSCI 231 Lecture Notes, Duke University — https://donaldlab.cs.duke.edu/Teaching/discretemath/F2026/lectures/l03-iteration-recursion-induction.txt
