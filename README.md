@@ -1,5 +1,3 @@
-th# Along the Way
-
 ## Function
 A website where a tiny figure walks toward a clearly marked finish on a campus map, but paying attention along the way reveals small everyday beauties and ideas that a rush to the finish would miss.
 
