@@ -1,0 +1,249 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 32px 5vw;
+  background-color: #f5f3eb;
+  color: #34483f;
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.6;
+}
+
+header {
+  flex: 1 1 250px;
+  max-width: 350px;
+  padding: 24px 0;
+  text-align: left;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #797b64;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+header .eyebrow {
+  margin-bottom: 30px;
+  color: #7b806b;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 76px;
+  font-weight: normal;
+  line-height: 0.98;
+  letter-spacing: -3px;
+}
+
+h1 span {
+  display: block;
+  margin-top: 8px;
+}
+
+h1 em {
+  color: #7a8869;
+  font-weight: normal;
+}
+
+header > p:last-child {
+  max-width: 260px;
+  margin: 32px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid #d5d6c7;
+  color: #727967;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+main {
+  flex: 2 1 460px;
+  max-width: 98vh;
+  min-width: 0;
+}
+
+.campus-map {
+  position: relative;
+  border: 8px solid #fffdf7;
+  border-radius: 5px;
+  box-shadow: 0 14px 40px #34483f12;
+}
+
+.campus-map > img {
+  display: block;
+  width: 100%;
+  border-radius: 2px;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+button:focus-visible {
+  outline: 3px solid #34483f;
+  outline-offset: 4px;
+}
+
+.map-point {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 2px solid #fffdf5;
+  border-radius: 50%;
+  background-color: #995c43;
+  color: #fffdf5;
+  box-shadow: 0 2px 6px #422e342e;
+  font-size: 15px;
+}
+
+.map-point:hover {
+  background-color: #5c7056;
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+.start,
+.finish {
+  position: absolute;
+  padding: 2px 9px;
+  border: 1px solid #a9b099;
+  border-radius: 4px;
+  background-color: #fffdf0;
+  color: #4f6249;
+  font-size: 12px;
+}
+
+.start {
+  left: 5%;
+  bottom: 5%;
+}
+
+.finish {
+  right: 7%;
+  top: 6%;
+}
+
+
+/* 1 — Chapel */
+.point-1 {
+  left: 42%;
+  top: 50%;
+}
+
+/* 2 — Brodhead */
+.point-2 {
+  left: 32%;
+  top: 58%;
+}
+
+/* 3 — Few Quad */
+.point-3 {
+  left: 27%;
+  top: 68%;
+}
+
+/* 4 — Wannamaker */
+.point-4 {
+  left: 10%;
+  top: 63%;
+}
+
+/* 5 — Wellness */
+.point-5 {
+  left: 22%;
+  top: 37%;
+}
+
+/* 6 — Edens */
+.point-6 {
+  left: 16%;
+  top: 86%;
+}
+
+dialog {
+  width: 900px;
+  max-width: 94%;
+  max-height: 90vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+dialog::backdrop {
+  background-color: #23392db3;
+}
+
+.postcard {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px;
+  min-height: 480px;
+  padding: 85px 7% 60px;
+  background-color: #fffdf4;
+  background-image: url('assets/images/postcard.png');
+  background-position: center;
+  background-size: 143% 143%;
+  background-repeat: no-repeat;
+}
+
+.close {
+  position: absolute;
+  top: 26px;
+  right: 7%;
+  padding: 4px 12px;
+  border: 1px solid #a9b099;
+  border-radius: 4px;
+  background-color: #fffdf4;
+  color: #34483f;
+  font-size: 14px;
+}
+
+.close:hover {
+  background-color: #eaeedf;
+}
+
+.postcard-photo {
+  flex: 1 1 240px;
+  width: 45%;
+  max-width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+}
+
+.postcard-message {
+  flex: 1 1 240px;
+}
+
+.postcard-message h2 {
+  margin: 12px 0;
+  font-size: 28px;
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.postcard-message .eyebrow {
+  letter-spacing: 1px;
+}
+
+.credit {
+  margin-top: 22px;
+  color: #69735f;
+  font-size: 13px;
+  font-style: italic;
+}

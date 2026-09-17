@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Along the Way</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <p class="eyebrow">SMALL MOMENTS, AROUND DUKE</p>
+    <h1>Along<span>the <em>Way</em></span></h1>
+    <p>Notice the little things that make the everyday beautiful.</p>
+  </header>
+
+  <main>
+    <section aria-label="Explore small moments around Duke">
+      <div class="campus-map">
+        <img src="assets/images/map.jpg" alt="An illustrated map of Duke campus with paths, buildings, and green spaces.">
+        <span class="start">Start here</span>
+        <span class="finish">Finish ⚑</span>
+        <button class="map-point point-1" onclick="document.getElementById('postcard-1').showModal()" aria-label="Open postcard 1: Chapel">1</button>
+        <button class="map-point point-2" onclick="document.getElementById('postcard-2').showModal()" aria-label="Open postcard 2: Brodhead">2</button>
+        <button class="map-point point-3" onclick="document.getElementById('postcard-3').showModal()" aria-label="Open postcard 3: Few Quad">3</button>
+        <button class="map-point point-4" onclick="document.getElementById('postcard-4').showModal()" aria-label="Open postcard 4: Wannamaker">4</button>
+        <button class="map-point point-5" onclick="document.getElementById('postcard-5').showModal()" aria-label="Open postcard 5: Wellness">5</button>
+        <button class="map-point point-6" onclick="document.getElementById('postcard-6').showModal()" aria-label="Open postcard 6: Edens">6</button>
+      </div>
+    </section>
+
+    <dialog id="postcard-1" aria-labelledby="title-1">
+      <div class="postcard">
+        <button class="close" onclick="document.getElementById('postcard-1').close()" aria-label="Close postcard">Close ×</button>
+        <img class="postcard-photo" src="assets/images/web/Ada_Chapel.jpg" alt="Duke Chapel at dusk, under a softly glowing red sky." loading="lazy">
+        <div class="postcard-message">
+          <p class="eyebrow">A MOMENT ALONG THE WAY · 01</p>
+          <h2 id="title-1">Chapel at Dusk</h2>
+          <p>A soft red glow settled over Duke Chapel as I walked home from class—an ordinary evening made unforgettable by a moment I almost missed.</p>
+          <p class="credit">Noticed by Ada</p>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="postcard-2" aria-labelledby="title-2">
+      <div class="postcard">
+        <button class="close" onclick="document.getElementById('postcard-2').close()" aria-label="Close postcard">Close ×</button>
+        <img class="postcard-photo" src="assets/images/web/Vanessa_Rainbow_Brodhead.jpg" alt="A band of rainbow light on the ground at Brodhead Center." loading="lazy">
+        <div class="postcard-message">
+          <p class="eyebrow">A MOMENT ALONG THE WAY · 02</p>
+          <h2 id="title-2">Rainbow at Brodhead</h2>
+          <p>In front of Brodhead Center, sunlight through the glass cast a rainbow band across the ground, and friends stopped together to watch amid the noise.</p>
+          <p class="credit">Noticed by Vanessa</p>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="postcard-3" aria-labelledby="title-3">
+      <div class="postcard">
+        <button class="close" onclick="document.getElementById('postcard-3').close()" aria-label="Close postcard">Close ×</button>
+        <img class="postcard-photo" src="assets/images/web/Vanessa_Alpaca_FewQuad.jpg" alt="A small alpaca plush resting on a railing near Few Quad." loading="lazy">
+        <div class="postcard-message">
+          <p class="eyebrow">A MOMENT ALONG THE WAY · 03</p>
+          <h2 id="title-3">Alpaca on the Railing</h2>
+          <p>A small alpaca plush lay on the stair railing near Few Quad, gazing into the distance as if it had found its own quiet view.</p>
+          <p class="credit">Noticed by Vanessa</p>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="postcard-4" aria-labelledby="title-4">
+      <div class="postcard">
+        <button class="close" onclick="document.getElementById('postcard-4').close()" aria-label="Close postcard">Close ×</button>
+        <img class="postcard-photo" src="assets/images/web/Vanessa_Kitten_Wannamaker.jpg" alt="A tiny kitten on the path behind Wannamaker." loading="lazy">
+        <div class="postcard-message">
+          <p class="eyebrow">A MOMENT ALONG THE WAY · 04</p>
+          <h2 id="title-4">A Tiny Kitten</h2>
+          <p>A tiny kitten, only a few months old, crossed the path behind Wannamaker with a soft, milky meow that made the whole moment feel gentle.</p>
+          <p class="credit">Noticed by Vanessa</p>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="postcard-5" aria-labelledby="title-5">
+      <div class="postcard">
+        <button class="close" onclick="document.getElementById('postcard-5').close()" aria-label="Close postcard">Close ×</button>
+        <img class="postcard-photo" src="assets/images/web/Vanessa_Capybara_Wellness.jpg" alt="Wooden details at the Wellness Center resembling capybara faces." loading="lazy">
+        <div class="postcard-message">
+          <p class="eyebrow">A MOMENT ALONG THE WAY · 05</p>
+          <h2 id="title-5">Hidden Capybaras</h2>
+          <p>The wooden decoration at the Wellness Center entrance looks, if you look closely, like a row of gentle capybara faces waiting to be noticed.</p>
+          <p class="credit">Noticed by Vanessa</p>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="postcard-6" aria-labelledby="title-6">
+      <div class="postcard">
+        <button class="close" onclick="document.getElementById('postcard-6').close()" aria-label="Close postcard">Close ×</button>
+        <img class="postcard-photo" src="assets/images/web/Ada_Raccoon_Edens.jpg" alt="A glimpse of raccoons on the path behind Edens." loading="lazy">
+        <div class="postcard-message">
+          <p class="eyebrow">A MOMENT ALONG THE WAY · 06</p>
+          <h2 id="title-6">Raccoons Behind Edens</h2>
+          <p>On my way to the laundry room, I met three tiny raccoons on the path behind Edens 2C; they disappeared too fast to photograph well, but the surprise stayed with me.</p>
+          <p class="credit">Noticed by Ada</p>
+        </div>
+      </div>
+    </dialog>
+
+  </main>
+</body>
+</html>
