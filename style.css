@@ -33,7 +33,7 @@ header {
 }
 
 header .eyebrow {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   color: #7b806b;
   font-size: 10px;
   letter-spacing: 2.5px;
@@ -41,7 +41,7 @@ header .eyebrow {
 
 h1 {
   margin: 0;
-  font-size: 76px;
+  font-size: 68px;
   font-weight: normal;
   line-height: 0.98;
   letter-spacing: -3px;
@@ -57,10 +57,10 @@ h1 em {
   font-weight: normal;
 }
 
-header > p:last-child {
+.introduction {
   max-width: 260px;
-  margin: 32px 0 0;
-  padding-top: 24px;
+  margin: 24px 0 0;
+  padding-top: 20px;
   border-top: 1px solid #d5d6c7;
   color: #727967;
   font-size: 18px;
@@ -96,81 +96,48 @@ button:focus-visible {
   outline-offset: 4px;
 }
 
-.map-point {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: 2px solid #fffdf5;
-  border-radius: 50%;
-  background-color: #995c43;
-  color: #fffdf5;
-  box-shadow: 0 2px 6px #422e342e;
-  font-size: 15px;
-}
-
-.map-point:hover {
-  background-color: #5c7056;
-  transform: translate(-50%, -50%) scale(1.12);
-}
-
 .start,
 .finish {
   position: absolute;
-  padding: 2px 9px;
-  border: 1px solid #a9b099;
-  border-radius: 4px;
+  z-index: 4;
+  padding: 3px 10px;
+  border: 1px solid #7d947e;
+  border-radius: 5px;
   background-color: #fffdf0;
-  color: #4f6249;
+  color: #405e4b;
   font-size: 12px;
+  box-shadow: 0 2px 4px #34483f18;
 }
 
 .start {
-  left: 5%;
-  bottom: 5%;
+  transform: translate(-50%, 12px);
 }
 
 .finish {
-  right: 7%;
-  top: 6%;
+  transform: translate(-50%, -125%);
 }
 
-
-/* 1 — Chapel */
-.point-1 {
-  left: 42%;
-  top: 50%;
+.start::before,
+.finish::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 10px;
+  background-color: #7d947e;
 }
 
-/* 2 — Brodhead */
-.point-2 {
-  left: 32%;
-  top: 58%;
+.start::before {
+  bottom: 100%;
 }
 
-/* 3 — Few Quad */
-.point-3 {
-  left: 27%;
-  top: 68%;
+.finish::after {
+  top: 100%;
 }
 
-/* 4 — Wannamaker */
-.point-4 {
-  left: 10%;
-  top: 63%;
-}
-
-/* 5 — Wellness */
-.point-5 {
-  left: 22%;
-  top: 37%;
-}
-
-/* 6 — Edens */
-.point-6 {
-  left: 16%;
-  top: 86%;
+.start:hover,
+.finish:hover {
+  background-color: #e9efdc;
 }
 
 dialog {
@@ -246,4 +213,174 @@ dialog::backdrop {
   color: #69735f;
   font-size: 13px;
   font-style: italic;
+}
+
+.routes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: manipulation;
+}
+
+.road {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 7;
+}
+
+.road-edge {
+  fill: none;
+  stroke: #fff8e8;
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 1px #34483f33);
+}
+
+.main-road {
+  stroke: #d56842;
+}
+
+.side-road {
+  stroke: #168f9c;
+  stroke-width: 6;
+  visibility: hidden;
+}
+
+.walk-controls {
+  margin-top: 22px;
+  max-width: 310px;
+  font-size: 14px;
+}
+
+.control-hint {
+  margin-bottom: 10px;
+}
+
+#walk-status {
+  min-height: 48px;
+  margin: 18px 0 0;
+  color: #727967;
+  font-style: italic;
+}
+
+#destination {
+  fill: #fffdf7;
+  stroke: #8d6248;
+  stroke-width: 2;
+  pointer-events: none;
+}
+
+#destination[hidden] {
+  display: none;
+}
+
+.road {
+  cursor: pointer;
+  pointer-events: visibleStroke;
+}
+
+.road:focus {
+  outline: none;
+}
+
+.road:focus-visible {
+  stroke: #365e70;
+}
+
+.walker {
+  position: absolute;
+  z-index: 3;
+  width: 24px;
+  height: 30px;
+  transform: translate(-50%, -90%);
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px #34483f66);
+}
+
+.walker-body {
+  position: absolute;
+  left: 5px;
+  bottom: 0;
+  width: 14px;
+  height: 20px;
+  border: 2px solid #fffdf7;
+  border-radius: 7px 7px 4px 4px;
+  background-color: #344f60;
+}
+
+.walker-hat {
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 15px;
+  border: 2px solid #fffdf7;
+  border-radius: 50%;
+  background-color: #d9b575;
+}
+
+.walking .walker-body {
+  animation: steps 0.5s infinite alternate;
+}
+
+@keyframes steps {
+  from { transform: rotate(-6deg); }
+  to { transform: rotate(6deg); }
+}
+
+.envelope {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.envelope img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.envelope:not(:disabled):hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.envelope[hidden] {
+  display: none;
+}
+
+.envelope:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.postcard-stop {
+  position: absolute;
+  z-index: 2;
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 3px solid #fffdf1;
+  border-radius: 50%;
+  background-color: #d56842;
+  box-shadow: 0 0 0 1px #89573e, 0 2px 4px #34483f22;
+}
+
+.postcard-stop:hover,
+.postcard-stop.nearby {
+  background-color: #168f9c;
+  box-shadow: 0 0 0 2px #fffdf1, 0 0 0 3px #168f9c;
+}
+
+.postcard-stop[hidden] {
+  display: none;
 }

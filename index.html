@@ -10,28 +10,49 @@
   <header>
     <p class="eyebrow">SMALL MOMENTS, AROUND DUKE</p>
     <h1>Along<span>the <em>Way</em></span></h1>
-    <p>Notice the little things that make the everyday beautiful.</p>
+    <p class="introduction">Notice the little things that make the everyday beautiful.</p>
+    <div class="walk-controls">
+      <p class="control-hint">Click a path to wander.<br>Stop at a circle to open its letter.</p>
+      <p id="walk-status" role="status">There’s no hurry to arrive.</p>
+    </div>
   </header>
 
   <main>
     <section aria-label="Explore small moments around Duke">
       <div class="campus-map">
         <img src="assets/images/map.jpg" alt="An illustrated map of Duke campus with paths, buildings, and green spaces.">
-        <span class="start">Start here</span>
-        <span class="finish">Finish ⚑</span>
-        <button class="map-point point-1" onclick="document.getElementById('postcard-1').showModal()" aria-label="Open postcard 1: Chapel">1</button>
-        <button class="map-point point-2" onclick="document.getElementById('postcard-2').showModal()" aria-label="Open postcard 2: Brodhead">2</button>
-        <button class="map-point point-3" onclick="document.getElementById('postcard-3').showModal()" aria-label="Open postcard 3: Few Quad">3</button>
-        <button class="map-point point-4" onclick="document.getElementById('postcard-4').showModal()" aria-label="Open postcard 4: Wannamaker">4</button>
-        <button class="map-point point-5" onclick="document.getElementById('postcard-5').showModal()" aria-label="Open postcard 5: Wellness">5</button>
-        <button class="map-point point-6" onclick="document.getElementById('postcard-6').showModal()" aria-label="Open postcard 6: Edens">6</button>
+        <svg class="routes" viewBox="0 0 1000 820" preserveAspectRatio="none" aria-label="Walking paths">
+          <path id="m1" class="road main-road" data-from="start" data-to="west-junction" d="M 100 690 Q 147 611 230 580 T 430 540" role="button" aria-label="Main path, lower campus" />
+          <path id="m2" class="road main-road" data-from="west-junction" data-to="south-junction" d="M 430 540 Q 494 523 535 495" role="button" aria-label="Main path, central campus" />
+          <path id="m3" class="road main-road" data-from="south-junction" data-to="north-junction" d="M 535 495 Q 567 467 580 415" role="button" aria-label="Main path, toward the chapel" />
+          <path id="m4" class="road main-road" data-from="north-junction" data-to="east-junction" d="M 580 415 C 590 366 612 281 675 213" role="button" aria-label="Main path, upper campus" />
+          <path id="m5" class="road main-road" data-from="east-junction" data-to="finish" d="M 675 213 Q 778 129 885 75" role="button" aria-label="Main path to the finish" />
+          <path id="west-entry" class="road side-road" data-from="west-junction" data-to="west-fork" d="M 430 540 C 365 528 288 466 253 415" role="button" aria-label="A turning to the west" />
+          <path id="west-upper" class="road side-road" data-from="west-fork" data-to="west-end" d="M 253 415 C 234 389 237 337 220 303 S 142 239 45 235" role="button" aria-label="The upper western path" />
+          <path id="west-left" class="road side-road" data-from="west-fork" data-to="kitten" d="M 253 415 Q 173 447 100 517" role="button" aria-label="A small path to the left" />
+          <path id="north-path" class="road side-road" data-from="north-junction" data-to="north-end" d="M 580 415 C 517 416 467 427 420 410 S 342 350 320 252 S 299 127 355 80" role="button" aria-label="A turning to the north" />
+          <path id="south-entry" class="road side-road" data-from="south-junction" data-to="south-fork" d="M 535 495 Q 561 512 575 542" role="button" aria-label="A turning to the south" />
+          <path id="south-lower" class="road side-road" data-from="south-fork" data-to="south-end" d="M 575 542 Q 625 618 640 775" role="button" aria-label="The lower southern path" />
+          <path id="south-left" class="road side-road" data-from="south-fork" data-to="raccoon" d="M 575 542 C 487 566 462 653 407 718 S 284 792 197 724" role="button" aria-label="A small path around the lawn" />
+          <path id="east-path" class="road side-road" data-from="east-junction" data-to="east-end" d="M 675 213 C 730 211 775 243 792 304 S 802 367 800 400" role="button" aria-label="A turning to the east" />
+          <circle id="destination" r="7" hidden aria-hidden="true" />
+        </svg>
+        <span id="walker" class="walker" role="img" aria-label="You, a little traveler"><span class="walker-body"></span><span class="walker-hat"></span></span>
+        <button id="start" class="start" aria-label="Walk back to the start">Start</button>
+        <button id="finish" class="finish" aria-label="Walk to the finish">Finish ⚑</button>
+        <button class="envelope point-1" data-road="north-path" data-card="postcard-1" style="left: 42%; top: 54%;" hidden aria-label="Open postcard: Chapel at Dusk"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope point-2" data-road="west-entry" data-card="postcard-2" style="left: 33%; top: 65%;" hidden aria-label="Open postcard: Rainbow at Brodhead"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope point-3" data-road="m1" data-card="postcard-3" style="left: 27%; top: 73%;" hidden aria-label="Open postcard: Alpaca on the Railing"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope point-4" data-road="west-left" data-card="postcard-4" style="left: 7%; top: 67%;" hidden aria-label="Open postcard: A Tiny Kitten"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope point-5" data-road="west-upper" data-card="postcard-5" style="left: 19%; top: 38%;" hidden aria-label="Open postcard: Hidden Capybaras"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope point-6" data-road="south-left" data-card="postcard-6" style="left: 16%; top: 88%;" hidden aria-label="Open postcard: Raccoons Behind Edens"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
       </div>
     </section>
 
     <dialog id="postcard-1" aria-labelledby="title-1">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-1').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/web/Ada_Chapel.jpg" alt="Duke Chapel at dusk, under a softly glowing red sky." loading="lazy">
+        <img class="postcard-photo" src="assets/images/Ada_Chapel.jpg" alt="Duke Chapel at dusk, under a softly glowing red sky." loading="lazy">
         <div class="postcard-message">
           <p class="eyebrow">A MOMENT ALONG THE WAY · 01</p>
           <h2 id="title-1">Chapel at Dusk</h2>
@@ -44,7 +65,7 @@
     <dialog id="postcard-2" aria-labelledby="title-2">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-2').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/web/Vanessa_Rainbow_Brodhead.jpg" alt="A band of rainbow light on the ground at Brodhead Center." loading="lazy">
+        <img class="postcard-photo" src="assets/images/Vanessa_Rainbow_Brodhead.jpg" alt="A band of rainbow light on the ground at Brodhead Center." loading="lazy">
         <div class="postcard-message">
           <p class="eyebrow">A MOMENT ALONG THE WAY · 02</p>
           <h2 id="title-2">Rainbow at Brodhead</h2>
@@ -57,7 +78,7 @@
     <dialog id="postcard-3" aria-labelledby="title-3">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-3').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/web/Vanessa_Alpaca_FewQuad.jpg" alt="A small alpaca plush resting on a railing near Few Quad." loading="lazy">
+        <img class="postcard-photo" src="assets/images/Vanessa_Alpaca_FewQuad.jpg" alt="A small alpaca plush resting on a railing near Few Quad." loading="lazy">
         <div class="postcard-message">
           <p class="eyebrow">A MOMENT ALONG THE WAY · 03</p>
           <h2 id="title-3">Alpaca on the Railing</h2>
@@ -70,7 +91,7 @@
     <dialog id="postcard-4" aria-labelledby="title-4">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-4').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/web/Vanessa_Kitten_Wannamaker.jpg" alt="A tiny kitten on the path behind Wannamaker." loading="lazy">
+        <img class="postcard-photo" src="assets/images/Vanessa_Kitten_Wannamaker.jpg" alt="A tiny kitten on the path behind Wannamaker." loading="lazy">
         <div class="postcard-message">
           <p class="eyebrow">A MOMENT ALONG THE WAY · 04</p>
           <h2 id="title-4">A Tiny Kitten</h2>
@@ -83,7 +104,7 @@
     <dialog id="postcard-5" aria-labelledby="title-5">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-5').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/web/Vanessa_Capybara_Wellness.jpg" alt="Wooden details at the Wellness Center resembling capybara faces." loading="lazy">
+        <img class="postcard-photo" src="assets/images/Vanessa_Capybara_Wellness.jpg" alt="Wooden details at the Wellness Center resembling capybara faces." loading="lazy">
         <div class="postcard-message">
           <p class="eyebrow">A MOMENT ALONG THE WAY · 05</p>
           <h2 id="title-5">Hidden Capybaras</h2>
@@ -96,7 +117,7 @@
     <dialog id="postcard-6" aria-labelledby="title-6">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-6').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/web/Ada_Raccoon_Edens.jpg" alt="A glimpse of raccoons on the path behind Edens." loading="lazy">
+        <img class="postcard-photo" src="assets/images/Ada_Raccoon_Edens.jpg" alt="A glimpse of raccoons on the path behind Edens." loading="lazy">
         <div class="postcard-message">
           <p class="eyebrow">A MOMENT ALONG THE WAY · 06</p>
           <h2 id="title-6">Raccoons Behind Edens</h2>
@@ -107,5 +128,233 @@
     </dialog>
 
   </main>
+  <script>
+const svg = document.querySelector('.routes');
+const roads = Array.from(document.querySelectorAll('.road'));
+const envelopes = Array.from(document.querySelectorAll('.envelope'));
+const walker = document.getElementById('walker');
+const destination = document.getElementById('destination');
+const statusText = document.getElementById('walk-status');
+const speed = 90;          
+const peek = 28;          
+const revealSpeed = 280; 
+
+roads.forEach(function (road) {
+  road.length = road.getTotalLength();
+  road.unlocked = road.classList.contains('main-road');
+  road.shown = road.unlocked ? road.length : 0;
+
+  road.edge = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  road.edge.setAttribute('d', road.getAttribute('d'));
+  road.edge.setAttribute('class', 'road-edge');
+  road.edge.setAttribute('aria-hidden', 'true');
+  svg.insertBefore(road.edge, roads[0]);
+});
+let position = { road: roads[0], distance: 0 };
+let journey = [];
+
+function parentRoad(road) {
+  return roads.find(function (p) { return p.dataset.to === road.dataset.from; });
+}
+
+function updatePaths() {
+  roads.forEach(function (road) {
+    const parent = parentRoad(road);
+
+    if (!road.unlocked && parent && parent.shown >= parent.length) {
+      road.shown = Math.max(road.shown, Math.min(peek, road.length));
+    }
+    road.style.visibility = road.shown > 0 ? 'visible' : 'hidden';
+    road.style.strokeDasharray = road.shown + ' ' + (road.length + 1);
+    road.edge.style.visibility = road.style.visibility;
+    road.edge.style.strokeDasharray = road.style.strokeDasharray;
+    road.setAttribute('tabindex', road.shown > 0 ? '0' : '-1');
+    road.setAttribute('aria-hidden', road.shown === 0);
+  });
+  envelopes.forEach(function (envelope) {
+    const road = document.getElementById(envelope.dataset.road);
+    envelope.hidden = road.shown < road.length;
+    envelope.stopButton.hidden = envelope.hidden;
+  });
+}
+
+function placeWalker() {
+  const point = position.road.getPointAtLength(position.distance);
+  walker.style.left = point.x / 10 + '%';
+  walker.style.top = point.y / 8.2 + '%';
+  updateEnvelopeAccess();
+}
+
+
+function findRoad(x, y) {
+  let nearest = null;
+  let best = 8 * 1000 / svg.getBoundingClientRect().width;
+  roads.forEach(function (road) {
+    if (road.shown === 0) return;
+
+    for (let start = 0; start < road.shown; start += 4) {
+      const end = Math.min(start + 4, road.shown);
+      const a = road.getPointAtLength(start);
+      const b = road.getPointAtLength(end);
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const ratio = Math.max(0, Math.min(1, ((x - a.x) * dx + (y - a.y) * dy) / (dx * dx + dy * dy)));
+      const gap = Math.hypot(x - a.x - ratio * dx, y - a.y - ratio * dy);
+      if (gap < best) {
+        best = gap;
+        nearest = { road: road, distance: start + ratio * (end - start) };
+      }
+    }
+  });
+  return nearest;
+}
+
+function routeFromStart(point) {
+  const route = [{ road: point.road, distance: point.distance }];
+  let parent = parentRoad(point.road);
+  while (parent) {
+    route.unshift({ road: parent, distance: parent.length });
+    parent = parentRoad(parent);
+  }
+  return route;
+}
+
+function goTo(target) {
+  target.road.unlocked = true; 
+  const from = routeFromStart(position);
+  const to = routeFromStart(target);
+  let shared = -1;
+  while (from[shared + 1] && to[shared + 1] && from[shared + 1].road === to[shared + 1].road) shared++;
+  journey = [];
+  for (let i = from.length - 1; i > shared; i--) {
+    journey.push({ road: from[i].road, start: from[i].distance, end: 0 });
+  }
+  if (shared >= 0) journey.push({ road: from[shared].road, start: from[shared].distance, end: to[shared].distance });
+  for (let i = shared + 1; i < to.length; i++) {
+    journey.push({ road: to[i].road, start: 0, end: to[i].distance });
+  }
+  journey = journey.filter(function (part) { return Math.abs(part.end - part.start) > 0.01; });
+  const point = target.road.getPointAtLength(target.distance);
+  destination.setAttribute('cx', point.x);
+  destination.setAttribute('cy', point.y);
+  destination.toggleAttribute('hidden', journey.length === 0);
+  walker.classList.toggle('walking', journey.length > 0);
+  statusText.textContent = journey.length > 0 ? 'A little walk, at your own pace.' : arrivalMessage();
+}
+
+svg.addEventListener('click', function (event) {
+  const box = svg.getBoundingClientRect();
+  const target = findRoad((event.clientX - box.left) / box.width * 1000, (event.clientY - box.top) / box.height * 820);
+  if (target) goTo(target);
+});
+
+svg.addEventListener('keydown', function (event) {
+  if ((event.key === 'Enter' || event.key === ' ') && event.target.classList.contains('road')) {
+    event.preventDefault();
+    goTo({ road: event.target, distance: event.target.shown / 2 });
+  }
+});
+
+function stop() {
+  journey = [];
+  destination.setAttribute('hidden', '');
+  walker.classList.remove('walking');
+}
+
+function updateEnvelopeAccess() {
+  envelopes.forEach(function (envelope) {
+    const nearby = position.road.id === envelope.dataset.road && Math.abs(position.distance - envelope.stopDistance) <= 22;
+    envelope.disabled = !nearby;
+    envelope.stopButton.classList.toggle('nearby', nearby);
+    envelope.title = nearby ? 'Open this letter' : 'Walk to the little circle first';
+  });
+}
+
+envelopes.forEach(function (envelope) {
+  const road = document.getElementById(envelope.dataset.road);
+  const x = parseFloat(envelope.style.left) * 10;
+  const y = parseFloat(envelope.style.top) * 8.2;
+  let nearest = Infinity;
+
+  for (let distance = 0; distance <= road.length; distance += 2) {
+    const point = road.getPointAtLength(distance);
+    const gap = Math.hypot(point.x - x, point.y - y);
+    if (gap < nearest) {
+      nearest = gap;
+      envelope.stopDistance = distance;
+    }
+  }
+  const point = road.getPointAtLength(envelope.stopDistance);
+  const button = document.createElement('button');
+  button.className = 'postcard-stop';
+  button.style.left = point.x / 10 + '%';
+  button.style.top = point.y / 8.2 + '%';
+  button.setAttribute('aria-label', envelope.getAttribute('aria-label').replace('Open postcard:', 'Walk to postcard:'));
+  button.title = 'Walk here to read the letter';
+  button.onclick = function () { goTo({ road: road, distance: envelope.stopDistance }); };
+  envelope.after(button);
+  envelope.stopButton = button;
+  envelope.onclick = function () {
+    if (envelope.disabled) return;
+    stop();
+    envelope.querySelector('img').src = 'assets/images/envelope2.png';
+    envelope.classList.add('opened');
+    document.getElementById(envelope.dataset.card).showModal();
+  };
+});
+
+const firstRoad = roads[0];
+const lastRoad = roads.find(function (road) { return road.dataset.to === 'finish'; });
+function connectLandmark(id, road, distance) {
+  const button = document.getElementById(id);
+  const point = road.getPointAtLength(distance);
+  button.style.left = point.x / 10 + '%';
+  button.style.top = point.y / 8.2 + '%';
+  button.onclick = function () { goTo({ road: road, distance: distance }); };
+}
+connectLandmark('start', firstRoad, 0);
+connectLandmark('finish', lastRoad, lastRoad.length);
+
+function arrivalMessage() {
+  if (position.road === lastRoad && position.distance >= lastRoad.length - 2) return 'You’ve arrived. There’s still time to wander.';
+  if (position.road === firstRoad && position.distance < 2) return 'Back at the beginning. Your discoveries are still here.';
+  return 'A moment to look around.';
+}
+window.addEventListener('blur', stop);
+document.addEventListener('visibilitychange', stop);
+window.addEventListener('keydown', function (event) { if (event.key === 'Escape') stop(); });
+
+let previousTime = 0;
+function animate(time) {
+  const seconds = Math.min((time - previousTime) / 1000, 0.05);
+  previousTime = time;
+  let revealing = false;
+  roads.forEach(function (road) {
+    if (road.unlocked && road.shown < road.length) {
+      road.shown = Math.min(road.length, road.shown + revealSpeed * seconds);
+      revealing = true;
+    }
+  });
+  if (revealing) updatePaths();
+  if (journey.length > 0) {
+    const part = journey[0];
+    if (position.road !== part.road) position = { road: part.road, distance: part.start };
+    const remaining = part.end - position.distance;
+    position.distance += Math.sign(remaining) * Math.min(Math.abs(remaining), speed * seconds);
+    placeWalker();
+    if (Math.abs(part.end - position.distance) < 0.01) {
+      journey.shift();
+      if (journey.length === 0) {
+        stop();
+        statusText.textContent = arrivalMessage();
+      }
+    }
+  }
+  requestAnimationFrame(animate);
+}
+updatePaths();
+placeWalker();
+requestAnimationFrame(animate);
+  </script>
 </body>
 </html>
