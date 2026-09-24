@@ -1,386 +1,393 @@
-* {
-  box-sizing: border-box;
+* { /* Every element on the page. */
+  box-sizing: border-box; /* Include padding and borders in the stated width and height. */
 }
 
-body {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 4vw;
-  min-height: 100vh;
-  margin: 0;
-  padding: 32px 5vw;
-  background-color: #f5f3eb;
-  color: #34483f;
-  font-family: Georgia, 'Times New Roman', serif;
-  line-height: 1.6;
+body { /* The whole page and its two-column layout. */
+  display: flex; /* Use Flexbox to arrange the contents in a row. */
+  flex-wrap: wrap; /* Let items move onto another row when they cannot fit. */
+  align-items: center; /* Center the contents vertically within each flex row. */
+  justify-content: center; /* Center the contents horizontally in this flex row. */
+  gap: 3vw; /* Leave 3% of the window width between the columns. (vw: The width of the visible area of the web page)*/
+  min-height: 100vh; /* Make the page at least as tall as the browser window. */
+  margin: 0; /* Remove the default outer space on all sides. */
+  padding: 24px 4vw; /* Set inner space: 24px top and bottom, 4vw left and right. */
+  background-color: #f5f3eb; /* Use #f5f3eb as the background color. */
+  color: #34483f; /* Use #34483f for the text color. */
+  font-family: Georgia, 'Times New Roman', serif; /* Use Georgia; the other fonts are backups if it is unavailable. */
+  line-height: 1.6; /* Make each text line 1.6 times the font size tall. */
 }
 
-header {
-  flex: 1 1 250px;
-  max-width: 350px;
-  padding: 24px 0;
-  text-align: left;
+header { /* The left column: title, intro, and instructions. */
+  flex: 1 1 360px; /* Grow with a weight of 1, allow shrinking with a weight of 1, and start from 360px. */
+  max-width: 380px; /* Keep the width at or below 380px. */
+  padding: 24px 0; /* Set inner space: 24px top and bottom, 0 left and right. */
+  text-align: left; /* Align text to the left. */
 }
 
-.eyebrow {
-  margin: 0 0 8px;
-  color: #797b64;
-  font-family: Arial, sans-serif;
-  font-size: 10px;
-  letter-spacing: 3px;
+
+h1 { /* The main Along the Way title. */
+  margin: 0; /* Remove the default outer space on all sides. */
+  font-size: 68px; /* Set the text size to 68px. */
+  font-weight: normal; /* Use regular weight rather than bold. */
+  line-height: 0.98; /* Make each text line 0.98 times the font size tall. */
+  letter-spacing: -3px; /* Adjust the space between letters by -3px to bring them closer. */
 }
 
-header .eyebrow {
-  margin-bottom: 24px;
-  color: #7b806b;
-  font-size: 10px;
-  letter-spacing: 2.5px;
+h1 span { /* The second line of the title: the Way. */
+  display: block; /* Use a block box; for images, this also removes the inline baseline gap. */
+  margin-top: 8px; /* Leave 8px of outer space on the top. */
 }
 
-h1 {
-  margin: 0;
-  font-size: 68px;
-  font-weight: normal;
-  line-height: 0.98;
-  letter-spacing: -3px;
+h1 em { /* The word Way in the title. */
+  color: #7a8869; /* Use #7a8869 for the text color. */
+  font-weight: normal; /* Use regular weight rather than bold. */
 }
 
-h1 span {
-  display: block;
-  margin-top: 8px;
+.introduction { /* The sentence below the main title. */
+  max-width: 260px; /* Keep the width at or below 260px. */
+  margin: 24px 0 0; /* Set outer space: 24px top, 0 left and right, 0 bottom. */
+  padding-top: 20px; /* Add 20px of inner space on the top. */
+  border-top: 1px solid #d5d6c7; /* Draw a 1px solid border in #d5d6c7 on the top. */
+  color: #727967; /* Use #727967 for the text color. */
+  font-size: 18px; /* Set the text size to 18px. */
+  line-height: 1.7; /* Make each text line 1.7 times the font size tall. */
 }
 
-h1 em {
-  color: #7a8869;
-  font-weight: normal;
+main { /* The right column: status text and map. */
+  flex: 2 1 460px; /* Grow with a weight of 2, allow shrinking with a weight of 1, and start from 460px. When there is still extra space on the same line and no width limit is encountered, it will be allocated more additional space than the header.
+It's not that the map is always twice as wide as the left side, but when allocating the "extra space", the ratio is 2:1.*/
+  max-width: 94vh; /* Limit the width to 94% of the window height to help the map fit.(vh: The height of the visible area of the web page)*/
+  min-width: 0; /* Allow this column to shrink below its content's usual minimum width. */
 }
 
-.introduction {
-  max-width: 260px;
-  margin: 24px 0 0;
-  padding-top: 20px;
-  border-top: 1px solid #d5d6c7;
-  color: #727967;
-  font-size: 18px;
-  line-height: 1.7;
+.campus-map { /* The frame around the campus map. */
+  position: relative; /* Keep this in the layout and use it as a reference for positioned children. The placement of the envelope, the little figure, Start and Finish should be based on this map box. (position: absolute;)*/
+  border: 8px solid #fffdf7; /* Draw a 8px solid border in #fffdf7 on all sides. */
+  border-radius: 5px; /* Round the corners by 5px. */
+  box-shadow: 0 14px 40px #34483f12; /* Add a shadow: 0 sideways, 14px down, 40px blur; the color includes opacity. */
 }
 
-main {
-  flex: 2 1 460px;
-  max-width: 98vh;
-  min-width: 0;
+.campus-map > img { /* The map image only; > means direct child. */
+  display: block; /* Use a block box; for images, this also removes the inline baseline gap. */
+  width: 100%; /* Set the width to 100% of the containing area. */
+  border-radius: 2px; /* Round the corners by 2px. */
 }
 
-.campus-map {
-  position: relative;
-  border: 8px solid #fffdf7;
-  border-radius: 5px;
-  box-shadow: 0 14px 40px #34483f12;
+button { /* All buttons on the website. */
+  cursor: pointer; /* Show a hand cursor to suggest this is clickable. */
+  font: inherit; /* Use the surrounding text font instead of the default button font. */
 }
 
-.campus-map > img {
-  display: block;
-  width: 100%;
-  border-radius: 2px;
-}
-
-button {
-  cursor: pointer;
-  font: inherit;
-}
-
-button:focus-visible {
-  outline: 3px solid #34483f;
-  outline-offset: 4px;
+button:focus-visible { /* Buttons when keyboard focus needs to be visible. */
+  outline: 3px solid #34483f; /* Draw a 3px dark green focus outline without changing the button size. */
+  outline-offset: 4px; /* Leave 4px between the button edge and the focus outline. */
 }
 
 .start,
-.finish {
-  position: absolute;
-  z-index: 4;
-  padding: 3px 10px;
-  border: 1px solid #7d947e;
-  border-radius: 5px;
-  background-color: #fffdf0;
-  color: #405e4b;
-  font-size: 12px;
-  box-shadow: 0 2px 4px #34483f18;
+.finish { /* The Start and Finish signs. */
+  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
+  z-index: 4; /* Use map layer 4; higher-numbered sibling layers appear in front. */
+  padding: 3px 10px; /* Set inner space: 3px top and bottom, 10px left and right. */
+  border: 1px solid #7d947e; /* Draw a 1px solid border in #7d947e on all sides. */
+  border-radius: 5px; /* Round the corners by 5px. */
+  background-color: #fffdf0; /* Use #fffdf0 as the background color. */
+  color: #405e4b; /* Use #405e4b for the text color. */
+  font-size: 12px; /* Set the text size to 12px. */
+  box-shadow: 0 2px 4px #34483f18; /* Add a shadow: 0 sideways, 2px down, 4px blur; the color includes opacity. */
 }
 
-.start {
-  transform: translate(-50%, 12px);
+.start { /* The Start sign position. */
+  transform: translate(-50%, 12px); /* Shift left by half the sign's width and down by 12px. */
 }
 
-.finish {
-  transform: translate(-50%, -125%);
+.finish { /* The Finish sign position. */
+  transform: translate(-50%, -125%); /* Shift left by half the sign's width and up by 125% of its height. */
 }
 
 .start::before,
-.finish::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  width: 1px;
-  height: 10px;
-  background-color: #7d947e;
+.finish::after { /* The little posts attached to both signs. */
+  content: ''; /* Create an empty decorative piece for ::before or ::after. */
+  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
+  left: 50%; /* Place this 50% from the left edge of its positioning box. */
+  width: 1px; /* Set the width to 1px. */
+  height: 10px; /* Set the height to 10px. */
+  background-color: #7d947e; /* Use #7d947e as the background color. */
 }
 
-.start::before {
-  bottom: 100%;
+.start::before { /* The post above Start. */
+  bottom: 100%; /* Place the bottom of the post at the top edge of the Start sign. */
 }
 
-.finish::after {
-  top: 100%;
+.finish::after { /* The post below Finish. */
+  top: 100%; /* Place the top of the post at the bottom edge of the Finish sign. */
 }
 
 .start:hover,
-.finish:hover {
-  background-color: #e9efdc;
+.finish:hover { /* Both signs when the mouse is over them. */
+  background-color: #e9efdc; /* Use #e9efdc as the background color. */
 }
 
-dialog {
-  width: 900px;
-  max-width: 94%;
-  max-height: 90vh;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
+dialog { /* The popup container for each postcard. */
+  width: 900px; /* Set the width to 900px. */
+  max-width: 94%; /* Keep the width at or below 94% of the containing area. */
+  max-height: 90vh; /* Limit the height to 90% of the browser window. */
+  padding: 0; /* Remove the default inner space on all sides. */
+  border: 0; /* Remove the default border. */
+  background: transparent; /* Remove the visible background so the content underneath can show. */
+  color: inherit; /* Use the parent element's text color. */
 }
 
-dialog::backdrop {
-  background-color: #23392db3;
+dialog::backdrop { /* The dim layer behind an open postcard. */
+  background-color: #23392db3; /* Use #23392db3 as the background color (the last two digits set opacity). */
 }
 
-.postcard {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 28px;
-  min-height: 480px;
-  padding: 85px 7% 60px;
-  background-color: #fffdf4;
-  background-image: url('assets/images/postcard.png');
-  background-position: center;
-  background-size: 143% 143%;
-  background-repeat: no-repeat;
+.postcard { /* The postcard paper, photo, and text layout. */
+  position: relative; /* Keep this in the layout and use it as a reference for positioned children. */
+  display: flex; /* Use Flexbox to arrange the contents in a row. */
+  flex-wrap: wrap; /* Let items move onto another row when they cannot fit. */
+  align-items: center; /* Center the contents vertically within each flex row. */
+  gap: 28px; /* Leave 28px between the flex items. */
+  min-height: 480px; /* Keep this at least 480px tall; it can grow if needed. */
+  padding: 85px 7% 60px; /* Set inner space: 85px top, 7% left and right, 60px bottom. */
+  background-color: #fffdf4; /* Use #fffdf4 as the background color. */
+  background-image: url('assets/images/postcard.png'); /* Use the postcard artwork as the background behind the photo and message. */
+  background-position: center; /* Center the postcard background image. */
+  background-size: 143% 143%; /* Scale the background to 143% of the area in both directions. */
+  background-repeat: no-repeat; /* Show the background image once instead of tiling it. */
 }
 
-.close {
-  position: absolute;
-  top: 26px;
-  right: 7%;
-  padding: 4px 12px;
-  border: 1px solid #a9b099;
-  border-radius: 4px;
-  background-color: #fffdf4;
-  color: #34483f;
-  font-size: 14px;
+.close { /* The Close button inside a postcard. */
+  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
+  top: 26px; /* Place this 26px from the top edge of its positioning box. */
+  right: 7%; /* Place this 7% from the right edge of its positioning box. */
+  padding: 4px 12px; /* Set inner space: 4px top and bottom, 12px left and right. */
+  border: 1px solid #a9b099; /* Draw a 1px solid border in #a9b099 on all sides. */
+  border-radius: 4px; /* Round the corners by 4px. */
+  background-color: #fffdf4; /* Use #fffdf4 as the background color. */
+  color: #34483f; /* Use #34483f for the text color. */
+  font-size: 14px; /* Set the text size to 14px. */
 }
 
-.close:hover {
-  background-color: #eaeedf;
+.close:hover { /* The Close button when hovered. */
+  background-color: #eaeedf; /* Use #eaeedf as the background color. */
 }
 
-.postcard-photo {
-  flex: 1 1 240px;
-  width: 45%;
-  max-width: 100%;
-  max-height: 340px;
-  object-fit: contain;
+.postcard-photo { /* The photo inside a postcard. */
+  flex: 1 1 240px; /* Grow with a weight of 1, allow shrinking with a weight of 1, and start from 240px. */
+  width: 45%; /* Set the width to 45% of the containing area. */
+  max-width: 100%; /* Keep the width at or below 100% of the containing area. */
+  max-height: 340px; /* Keep this no taller than 340px. */
+  object-fit: contain; /* Keep the whole image visible without stretching or cropping it. */
 }
 
-.postcard-message {
-  flex: 1 1 240px;
+.postcard-message { /* The text column inside a postcard. */
+  flex: 1 1 240px; /* Grow with a weight of 1, allow shrinking with a weight of 1, and start from 240px. */
 }
 
-.postcard-message h2 {
-  margin: 12px 0;
-  font-size: 28px;
-  font-weight: normal;
-  line-height: 1.2;
+.postcard-message h2 { /* The title inside a postcard message. */
+  margin: 12px 0; /* Set outer space: 12px top and bottom, 0 left and right. */
+  font-size: 28px; /* Set the text size to 28px. */
+  font-weight: normal; /* Use regular weight rather than bold. */
+  line-height: 1.2; /* Make each text line 1.2 times the font size tall. */
 }
 
-.postcard-message .eyebrow {
-  letter-spacing: 1px;
+.credit { /* The photographer or source credit. */
+  margin-top: 22px; /* Leave 22px of outer space on the top. */
+  color: #69735f; /* Use #69735f for the text color. */
+  font-size: 13px; /* Set the text size to 13px. */
+  font-style: italic; /* Slant the text into italics. */
 }
 
-.credit {
-  margin-top: 22px;
-  color: #69735f;
-  font-size: 13px;
-  font-style: italic;
+.routes { /* The SVG path layer over the map. */
+  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
+  inset: 0; /* Set top, right, bottom, and left to zero. */
+  width: 100%; /* Set the width to 100% of the containing area. */
+  height: 100%; /* Set the height to 100% of the containing area. */
+  touch-action: manipulation; /* Allow touch scrolling and pinch zoom, but not double-tap zoom. */
 }
 
-.routes {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  touch-action: manipulation;
+.road { /* The basic look of all roads. */
+  fill: none; /* Do not fill the inside of the SVG shape; draw only its line. */
+  stroke-linecap: round; /* Round off the ends of the road. */
+  stroke-linejoin: round; /* Round off corners where line segments meet. */
+  stroke-width: 7; /* Make the SVG line 7 map units wide; it scales with the map. */
 }
 
-.road {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 7;
+.road-edge { /* The cream outline behind each road; added by the script. */
+  fill: none; /* Do not fill the inside of the SVG shape; draw only its line. */
+  stroke: #fff8e8; /* Color the SVG line or border #fff8e8. */
+  stroke-width: 12; /* Make the SVG line 12 map units wide; it scales with the map. */
+  stroke-linecap: round; /* Round off the ends of the road. */
+  stroke-linejoin: round; /* Round off corners where line segments meet. */
+  pointer-events: none; /* Let mouse clicks pass through this element. */
+  filter: drop-shadow(0 1px 1px #34483f33); /* Add a soft shadow that follows the visible shape, including transparent edges. */
 }
 
-.road-edge {
-  fill: none;
-  stroke: #fff8e8;
-  stroke-width: 12;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  pointer-events: none;
-  filter: drop-shadow(0 1px 1px #34483f33);
+.main-road { /* The main route. */
+  stroke: #d56842; /* Color the SVG line or border #d56842. */
 }
 
-.main-road {
-  stroke: #d56842;
+.side-road { /* The side routes. */
+  stroke: #168f9c; /* Color the SVG line or border #168f9c. */
+  stroke-width: 6; /* Make the SVG line 6 map units wide; it scales with the map. */
+  visibility: hidden; /* Start with this road hidden; the script controls its reveal later. */
 }
 
-.side-road {
-  stroke: #168f9c;
-  stroke-width: 6;
-  visibility: hidden;
+.walk-controls { /* The instructions box on the left. */
+  margin-top: 24px; /* Leave 24px of outer space on the top. */
+  max-width: 380px; /* Keep the width at or below 380px. */
+  padding: 18px 20px; /* Set inner space: 18px top and bottom, 20px left and right. */
+  border-left: 4px solid #d56842; /* Draw a 4px solid border in #d56842 on the left. */
+  border-radius: 4px; /* Round the corners by 4px. */
+  background-color: #fff9ed; /* Use #fff9ed as the background color. */
 }
 
-.walk-controls {
-  margin-top: 22px;
-  max-width: 310px;
-  font-size: 14px;
+.walk-controls h2 { /* The instructions heading. */
+  margin: 0 0 12px; /* Set outer space: 0 top, 0 left and right, 12px bottom. */
+  color: #34483f; /* Use #34483f for the text color. */
+  font-size: 22px; /* Set the text size to 22px. */
+  font-weight: normal; /* Use regular weight rather than bold. */
+  line-height: 1.25; /* Make each text line 1.25 times the font size tall. */
 }
 
-.control-hint {
-  margin-bottom: 10px;
+.walk-controls ol { /* The numbered instructions list. */
+  margin: 0; /* Remove the default outer space on all sides. */
+  padding-left: 20px; /* Add 20px of inner space on the left. */
+  font-size: 14px; /* Set the text size to 14px. */
+  line-height: 1.6; /* Make each text line 1.6 times the font size tall. */
 }
 
-#walk-status {
-  min-height: 48px;
-  margin: 18px 0 0;
-  color: #727967;
-  font-style: italic;
+.walk-controls li { /* Each numbered instruction. */
+  padding-left: 3px; /* Add 3px of inner space on the left. */
+  margin: 7px 0; /* Set outer space: 7px top and bottom, 0 left and right. */
 }
 
-#destination {
-  fill: #fffdf7;
-  stroke: #8d6248;
-  stroke-width: 2;
-  pointer-events: none;
+.walk-feedback { /* The wrapper around the changing message. */
+  margin-bottom: 6px; /* Leave 6px of outer space on the bottom. */
+  padding: 0 12px; /* Set inner space: 0 top and bottom, 12px left and right. */
+  text-align: center; /* Center the text horizontally. */
 }
 
-#destination[hidden] {
-  display: none;
+#walk-status { /* The changing message above the map; # selects its id. */
+  display: flex; /* Use Flexbox to arrange the contents in a row. */
+  align-items: flex-end; /* Place the message at the bottom of its fixed-height box. */
+  justify-content: center; /* Center the contents horizontally in this flex row. */
+  height: 54px; /* Reserve a steady 54px for messages so changing text does not move the map. */
+  margin: 0; /* Remove the default outer space on all sides. */
+  color: #526451; /* Use #526451 for the text color. */
+  font-size: 19px; /* Set the text size to 19px. */
+  font-style: italic; /* Slant the text into italics. */
+  font-weight: bold; /* Make the text bold. */
+  line-height: 1.4; /* Make each text line 1.4 times the font size tall. */
 }
 
-.road {
-  cursor: pointer;
-  pointer-events: visibleStroke;
+.source-link { /* The link to the original lecture notes. */
+  color: #315e64; /* Use #315e64 for the text color. */
+  font-size: 14px; /* Set the text size to 14px. */
+  text-underline-offset: 3px; /* Place the link underline 3px below its usual text reference position. */
 }
 
-.road:focus {
-  outline: none;
+#destination { /* The destination marker on the road. */
+  fill: #fffdf7; /* Fill the inside of the SVG circle with #fffdf7. */
+  stroke: #8d6248; /* Color the SVG line or border #8d6248. */
+  stroke-width: 2; /* Make the SVG line 2 map units wide; it scales with the map. */
+  pointer-events: none; /* Let mouse clicks pass through this element. */
 }
 
-.road:focus-visible {
-  stroke: #365e70;
+#destination[hidden] { /* The destination marker when it has the hidden attribute. */
+  display: none; /* Hide this element completely and remove its layout space. */
 }
 
-.walker {
-  position: absolute;
-  z-index: 3;
-  width: 24px;
-  height: 30px;
-  transform: translate(-50%, -90%);
-  pointer-events: none;
-  filter: drop-shadow(0 2px 2px #34483f66);
+.road { /* Extra interaction styles for all roads. */
+  cursor: pointer; /* Show a hand cursor to suggest this is clickable. */
+  pointer-events: visibleStroke; /* Let the visible SVG stroke receive clicks, not the empty area around it. */
 }
 
-.walker-body {
-  position: absolute;
-  left: 5px;
-  bottom: 0;
-  width: 14px;
-  height: 20px;
-  border: 2px solid #fffdf7;
-  border-radius: 7px 7px 4px 4px;
-  background-color: #344f60;
+.road:focus { /* A road that has focus. */
+  outline: none; /* Remove the default focus outline; the next rule uses a color change instead. */
 }
 
-.walker-hat {
-  position: absolute;
-  top: 0;
-  width: 24px;
-  height: 15px;
-  border: 2px solid #fffdf7;
-  border-radius: 50%;
-  background-color: #d9b575;
+.road:focus-visible { /* A road with visible keyboard focus. */
+  stroke: #365e70; /* Color the SVG line or border #365e70. */
 }
 
-.walking .walker-body {
-  animation: steps 0.5s infinite alternate;
+.walker { /* The whole little character. */
+  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
+  z-index: 3; /* Use map layer 3; higher-numbered sibling layers appear in front. */
+  width: 24px; /* Set the width to 24px. */
+  height: 30px; /* Set the height to 30px. */
+  transform: translate(-50%, -90%); /* Center the character horizontally and lift it so its feet sit near the path. */
+  pointer-events: none; /* Let mouse clicks pass through this element. */
+  filter: drop-shadow(0 2px 2px #34483f66); /* Add a soft shadow that follows the visible shape, including transparent edges. */
 }
 
-@keyframes steps {
-  from { transform: rotate(-6deg); }
-  to { transform: rotate(6deg); }
+.walker-body { /* The blue body of the character. */
+  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
+  left: 5px; /* Place this 5px from the left edge of its positioning box. */
+  bottom: 0; /* Place this 0 from the bottom edge of its positioning box. */
+  width: 14px; /* Set the width to 14px. */
+  height: 20px; /* Set the height to 20px. */
+  border: 2px solid #fffdf7; /* Draw a 2px solid border in #fffdf7 on all sides. */
+  border-radius: 7px 7px 4px 4px; /* Round the corners: top-left 7px, top-right 7px, bottom-right 4px, bottom-left 4px. */
+  background-color: #344f60; /* Use #344f60 as the background color. */
 }
 
-.envelope {
-  position: absolute;
-  z-index: 2;
-  transform: translate(-50%, -50%);
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border: 0;
-  background: transparent;
+.walker-hat { /* The tan hat of the character. */
+  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
+  top: 0; /* Place this 0 from the top edge of its positioning box. */
+  width: 24px; /* Set the width to 24px. */
+  height: 15px; /* Set the height to 15px. */
+  border: 2px solid #fffdf7; /* Draw a 2px solid border in #fffdf7 on all sides. */
+  border-radius: 50%; /* Make a circle if width equals height, or an oval if they differ. */
+  background-color: #d9b575; /* Use #d9b575 as the background color. */
 }
 
-.envelope img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.envelope { /* The envelope buttons on the map. */
+  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
+  z-index: 2; /* Use map layer 2; higher-numbered sibling layers appear in front. */
+  transform: translate(-50%, -50%); /* Center this on its coordinate by shifting left and up by half its own size. */
+  width: 48px; /* Set the width to 48px. */
+  height: 48px; /* Set the height to 48px. */
+  padding: 0; /* Remove the default inner space on all sides. */
+  border: 0; /* Remove the default border. */
+  background: transparent; /* Remove the visible background so the content underneath can show. */
 }
 
-.envelope:not(:disabled):hover {
-  transform: translate(-50%, -50%) scale(1.1);
+.envelope img { /* The image inside each envelope button. */
+  display: block; /* Use a block box; for images, this also removes the inline baseline gap. */
+  width: 100%; /* Set the width to 100% of the containing area. */
+  height: 100%; /* Set the height to 100% of the containing area. */
+  object-fit: contain; /* Keep the whole image visible without stretching or cropping it. */
 }
 
-.envelope[hidden] {
-  display: none;
+.envelope[hidden] { /* Envelopes with the hidden attribute. */
+  display: none; /* Hide this element completely and remove its layout space. */
 }
 
-.envelope:disabled {
-  cursor: default;
-  opacity: 0.75;
+.envelope:disabled { /* Envelopes that are too far away to open. */
+  cursor: default; /* Use the normal cursor instead of a hand. */
+  opacity: 0.75; /* Show this at 75% opacity so it looks slightly faded. */
 }
 
-.postcard-stop {
-  position: absolute;
-  z-index: 2;
-  width: 17px;
-  height: 17px;
-  padding: 0;
-  transform: translate(-50%, -50%);
-  border: 3px solid #fffdf1;
-  border-radius: 50%;
-  background-color: #d56842;
-  box-shadow: 0 0 0 1px #89573e, 0 2px 4px #34483f22;
+.postcard-stop { /* The small stopping circles; added by the script. */
+  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
+  z-index: 2; /* Use map layer 2; higher-numbered sibling layers appear in front. */
+  width: 17px; /* Set the width to 17px. */
+  height: 17px; /* Set the height to 17px. */
+  padding: 0; /* Remove the default inner space on all sides. */
+  transform: translate(-50%, -50%); /* Center this on its coordinate by shifting left and up by half its own size. */
+  border: 3px solid #fffdf1; /* Draw a 3px solid border in #fffdf1 on all sides. */
+  border-radius: 50%; /* Make a circle if width equals height, or an oval if they differ. */
+  background-color: #d56842; /* Use #d56842 as the background color. */
+  box-shadow: 0 0 0 1px #89573e, 0 2px 4px #34483f22; /* Draw two shadows: an outer ring, plus a soft shadow below. */
 }
 
 .postcard-stop:hover,
-.postcard-stop.nearby {
-  background-color: #168f9c;
-  box-shadow: 0 0 0 2px #fffdf1, 0 0 0 3px #168f9c;
+.postcard-stop.nearby { /* A stop circle when hovered or given the nearby class. */
+  background-color: #168f9c; /* Use #168f9c as the background color. */
+  box-shadow: 0 0 0 2px #fffdf1, 0 0 0 3px #168f9c; /* Draw two shadows: an outer ring, plus another ring. */
 }
 
-.postcard-stop[hidden] {
-  display: none;
+.postcard-stop[hidden] { /* Stop circles with the hidden attribute. */
+  display: none; /* Hide this element completely and remove its layout space. */
 }

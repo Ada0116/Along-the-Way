@@ -8,21 +8,27 @@
 </head>
 <body>
   <header>
-    <p class="eyebrow">SMALL MOMENTS, AROUND DUKE</p>
     <h1>Along<span>the <em>Way</em></span></h1>
     <p class="introduction">Notice the little things that make the everyday beautiful.</p>
-    <div class="walk-controls">
-      <p class="control-hint">Click a path to wander.<br>Stop at a circle to open its letter.</p>
-      <p id="walk-status" role="status">There’s no hurry to arrive.</p>
-    </div>
+    <section class="walk-controls">
+      <h2>Click a path. See what you notice.</h2>
+      <ol>
+        <li><strong>Click a path on the map</strong> to walk there.</li>
+        <li>Notice a side path?</li>
+        <li>Pause at a circle, then click its envelope.</li>
+      </ol>
+    </section>
   </header>
 
   <main>
+    <div class="walk-feedback">
+      <p id="walk-status" role="status">There’s no hurry to arrive.</p><!-- role="status": Tell the assistive technology: This is a status message area, and the content inside may be updated.-->
+    </div>
     <section aria-label="Explore small moments around Duke">
       <div class="campus-map">
         <img src="assets/images/map.jpg" alt="An illustrated map of Duke campus with paths, buildings, and green spaces.">
-        <svg class="routes" viewBox="0 0 1000 820" preserveAspectRatio="none" aria-label="Walking paths">
-          <path id="m1" class="road main-road" data-from="start" data-to="west-junction" d="M 100 690 Q 147 611 230 580 T 430 540" role="button" aria-label="Main path, lower campus" />
+        <svg class="routes" viewBox="0 0 1000 820" preserveAspectRatio="none" aria-label="Walking paths"><!--preserveAspectRatio:Allow this coordinate area to scale horizontally and vertically respectively to fill the display area of the SVG.-->
+          <path id="m1" class="road main-road" data-from="start" data-to="west-junction" d="M 100 690 Q 147 611 230 580 T 430 540" role="button" aria-label="Main path, lower campus" /><!--bezier curve, curve of the second degree-->
           <path id="m2" class="road main-road" data-from="west-junction" data-to="south-junction" d="M 430 540 Q 494 523 535 495" role="button" aria-label="Main path, central campus" />
           <path id="m3" class="road main-road" data-from="south-junction" data-to="north-junction" d="M 535 495 Q 567 467 580 415" role="button" aria-label="Main path, toward the chapel" />
           <path id="m4" class="road main-road" data-from="north-junction" data-to="east-junction" d="M 580 415 C 590 366 612 281 675 213" role="button" aria-label="Main path, upper campus" />
@@ -35,26 +41,26 @@
           <path id="south-lower" class="road side-road" data-from="south-fork" data-to="south-end" d="M 575 542 Q 625 618 640 775" role="button" aria-label="The lower southern path" />
           <path id="south-left" class="road side-road" data-from="south-fork" data-to="raccoon" d="M 575 542 C 487 566 462 653 407 718 S 284 792 197 724" role="button" aria-label="A small path around the lawn" />
           <path id="east-path" class="road side-road" data-from="east-junction" data-to="east-end" d="M 675 213 C 730 211 775 243 792 304 S 802 367 800 400" role="button" aria-label="A turning to the east" />
-          <circle id="destination" r="7" hidden aria-hidden="true" />
+          <circle id="destination" r="7" hidden aria-hidden="true" /> <!--hidden: Indicate initial hiding-->
         </svg>
         <span id="walker" class="walker" role="img" aria-label="You, a little traveler"><span class="walker-body"></span><span class="walker-hat"></span></span>
         <button id="start" class="start" aria-label="Walk back to the start">Start</button>
         <button id="finish" class="finish" aria-label="Walk to the finish">Finish ⚑</button>
-        <button class="envelope point-1" data-road="north-path" data-card="postcard-1" style="left: 42%; top: 54%;" hidden aria-label="Open postcard: Chapel at Dusk"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
-        <button class="envelope point-2" data-road="west-entry" data-card="postcard-2" style="left: 33%; top: 65%;" hidden aria-label="Open postcard: Rainbow at Brodhead"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
-        <button class="envelope point-3" data-road="m1" data-card="postcard-3" style="left: 27%; top: 73%;" hidden aria-label="Open postcard: Alpaca on the Railing"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
-        <button class="envelope point-4" data-road="west-left" data-card="postcard-4" style="left: 7%; top: 67%;" hidden aria-label="Open postcard: A Tiny Kitten"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
-        <button class="envelope point-5" data-road="west-upper" data-card="postcard-5" style="left: 19%; top: 38%;" hidden aria-label="Open postcard: Hidden Capybaras"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
-        <button class="envelope point-6" data-road="south-left" data-card="postcard-6" style="left: 16%; top: 88%;" hidden aria-label="Open postcard: Raccoons Behind Edens"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope" data-road="north-path" data-card="postcard-1" style="left: 42%; top: 54%;" hidden aria-label="Open postcard: Chapel at Dusk"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope" data-road="west-entry" data-card="postcard-2" style="left: 33%; top: 65%;" hidden aria-label="Open postcard: Rainbow at Brodhead"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope" data-road="m1" data-card="postcard-3" style="left: 27%; top: 73%;" hidden aria-label="Open postcard: Alpaca on the Railing"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope" data-road="west-left" data-card="postcard-4" style="left: 7%; top: 67%;" hidden aria-label="Open postcard: A Tiny Kitten"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope" data-road="west-upper" data-card="postcard-5" style="left: 19%; top: 38%;" hidden aria-label="Open postcard: Hidden Capybaras"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope" data-road="south-left" data-card="postcard-6" style="left: 16%; top: 88%;" hidden aria-label="Open postcard: Raccoons Behind Edens"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope" data-road="north-path" data-card="postcard-7" style="left: 39%; top: 8%;" hidden aria-label="Open postcard: The Pluto of Prime Numbers"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
       </div>
     </section>
 
     <dialog id="postcard-1" aria-labelledby="title-1">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-1').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/Ada_Chapel.jpg" alt="Duke Chapel at dusk, under a softly glowing red sky." loading="lazy">
+        <img class="postcard-photo" src="assets/images/web/Ada_Chapel.jpg" alt="Duke Chapel at dusk, under a softly glowing red sky." loading="lazy">
         <div class="postcard-message">
-          <p class="eyebrow">A MOMENT ALONG THE WAY · 01</p>
           <h2 id="title-1">Chapel at Dusk</h2>
           <p>A soft red glow settled over Duke Chapel as I walked home from class—an ordinary evening made unforgettable by a moment I almost missed.</p>
           <p class="credit">Noticed by Ada</p>
@@ -65,9 +71,8 @@
     <dialog id="postcard-2" aria-labelledby="title-2">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-2').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/Vanessa_Rainbow_Brodhead.jpg" alt="A band of rainbow light on the ground at Brodhead Center." loading="lazy">
+        <img class="postcard-photo" src="assets/images/web/Vanessa_Rainbow_Brodhead.jpg" alt="A band of rainbow light on the ground at Brodhead Center." loading="lazy">
         <div class="postcard-message">
-          <p class="eyebrow">A MOMENT ALONG THE WAY · 02</p>
           <h2 id="title-2">Rainbow at Brodhead</h2>
           <p>In front of Brodhead Center, sunlight through the glass cast a rainbow band across the ground, and friends stopped together to watch amid the noise.</p>
           <p class="credit">Noticed by Vanessa</p>
@@ -78,9 +83,8 @@
     <dialog id="postcard-3" aria-labelledby="title-3">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-3').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/Vanessa_Alpaca_FewQuad.jpg" alt="A small alpaca plush resting on a railing near Few Quad." loading="lazy">
+        <img class="postcard-photo" src="assets/images/web/Vanessa_Alpaca_FewQuad.jpg" alt="A small alpaca plush resting on a railing near Few Quad." loading="lazy">
         <div class="postcard-message">
-          <p class="eyebrow">A MOMENT ALONG THE WAY · 03</p>
           <h2 id="title-3">Alpaca on the Railing</h2>
           <p>A small alpaca plush lay on the stair railing near Few Quad, gazing into the distance as if it had found its own quiet view.</p>
           <p class="credit">Noticed by Vanessa</p>
@@ -91,9 +95,8 @@
     <dialog id="postcard-4" aria-labelledby="title-4">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-4').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/Vanessa_Kitten_Wannamaker.jpg" alt="A tiny kitten on the path behind Wannamaker." loading="lazy">
+        <img class="postcard-photo" src="assets/images/web/Vanessa_Kitten_Wannamaker.jpg" alt="A tiny kitten on the path behind Wannamaker." loading="lazy">
         <div class="postcard-message">
-          <p class="eyebrow">A MOMENT ALONG THE WAY · 04</p>
           <h2 id="title-4">A Tiny Kitten</h2>
           <p>A tiny kitten, only a few months old, crossed the path behind Wannamaker with a soft, milky meow that made the whole moment feel gentle.</p>
           <p class="credit">Noticed by Vanessa</p>
@@ -104,9 +107,8 @@
     <dialog id="postcard-5" aria-labelledby="title-5">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-5').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/Vanessa_Capybara_Wellness.jpg" alt="Wooden details at the Wellness Center resembling capybara faces." loading="lazy">
+        <img class="postcard-photo" src="assets/images/web/Vanessa_Capybara_Wellness.jpg" alt="Wooden details at the Wellness Center resembling capybara faces." loading="lazy">
         <div class="postcard-message">
-          <p class="eyebrow">A MOMENT ALONG THE WAY · 05</p>
           <h2 id="title-5">Hidden Capybaras</h2>
           <p>The wooden decoration at the Wellness Center entrance looks, if you look closely, like a row of gentle capybara faces waiting to be noticed.</p>
           <p class="credit">Noticed by Vanessa</p>
@@ -117,9 +119,8 @@
     <dialog id="postcard-6" aria-labelledby="title-6">
       <div class="postcard">
         <button class="close" onclick="document.getElementById('postcard-6').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/Ada_Raccoon_Edens.jpg" alt="A glimpse of raccoons on the path behind Edens." loading="lazy">
+        <img class="postcard-photo" src="assets/images/web/Ada_Raccoon_Edens.jpg" alt="A glimpse of raccoons on the path behind Edens." loading="lazy">
         <div class="postcard-message">
-          <p class="eyebrow">A MOMENT ALONG THE WAY · 06</p>
           <h2 id="title-6">Raccoons Behind Edens</h2>
           <p>On my way to the laundry room, I met three tiny raccoons on the path behind Edens 2C; they disappeared too fast to photograph well, but the surprise stayed with me.</p>
           <p class="credit">Noticed by Ada</p>
@@ -127,234 +128,267 @@
       </div>
     </dialog>
 
+    <dialog id="postcard-7" aria-labelledby="title-7">
+      <div class="postcard">
+        <button class="close" onclick="document.getElementById('postcard-7').close()" aria-label="Close postcard">Close ×</button>
+        <img class="postcard-photo" src="assets/images/COMPSCI231_InductionJoke.jpg" alt="COMPSCI 231 lecture notes with the aside: 1 is the Pluto of Prime numbers.">
+        <div class="postcard-message">
+          <h2 id="title-7">The Pluto of Prime Numbers</h2>
+          <p>In the COMPSCI 231 notes, the professor jokes that &quot;1 is the Pluto of Prime numbers.&quot; If your goal is to finish quickly by asking AI for a summary, you get the definitions and proofs—but not the joke. That small aside is a creative touch that reveals the professor&#x27;s humor and makes the math feel human.</p>
+          <p class="credit">From COMPSCI 231 lecture notes, Duke University</p>
+          <a class="source-link" href="https://donaldlab.cs.duke.edu/Teaching/discretemath/F2026/lectures/l03-iteration-recursion-induction.txt" target="_blank" rel="noopener">Read the original notes ↗</a>
+        </div>
+      </div>
+    </dialog>
+
   </main>
   <script>
-const svg = document.querySelector('.routes');
-const roads = Array.from(document.querySelectorAll('.road'));
-const envelopes = Array.from(document.querySelectorAll('.envelope'));
-const walker = document.getElementById('walker');
-const destination = document.getElementById('destination');
-const statusText = document.getElementById('walk-status');
-const speed = 90;          
-const peek = 28;          
-const revealSpeed = 280; 
+const svg = document.querySelector('.routes'); // querySelector(...) According to the CSS selector, find the first matching element.
+const roads = Array.from(document.querySelectorAll('.road')); // Collect all roads in an array so we can loop through them.
+const envelopes = Array.from(document.querySelectorAll('.envelope')); // Collect all envelope buttons in an array.
+const walker = document.getElementById('walker'); // Find the little character on the map.
+const destination = document.getElementById('destination'); // Find the circle that marks the chosen destination.
+const statusText = document.getElementById('walk-status'); // Find the changing message above the map.
+const speed = 90; // Walk 90 map units per second.
+const peek = 28; // Show 28 map units as a hint of an unexplored side path.
+const revealSpeed = 280; // Reveal 280 map units of road per second.
 
-roads.forEach(function (road) {
-  road.length = road.getTotalLength();
-  road.unlocked = road.classList.contains('main-road');
-  road.shown = road.unlocked ? road.length : 0;
+roads.forEach(function (road) { // Run this block for each road.
+  road.length = road.getTotalLength(); // Measure the full length of this SVG path.
+  road.unlocked = road.classList.contains('main-road'); // Main roads start unlocked; side roads do not.
+  road.shown = road.unlocked ? road.length : 0; // Show the whole main road, or none of a side road yet.
 
-  road.edge = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  road.edge.setAttribute('d', road.getAttribute('d'));
-  road.edge.setAttribute('class', 'road-edge');
-  road.edge.setAttribute('aria-hidden', 'true');
-  svg.insertBefore(road.edge, roads[0]);
+  road.edge = document.createElementNS('http://www.w3.org/2000/svg', 'path'); // Create another SVG path for the cream outline.
+  road.edge.setAttribute('d', road.getAttribute('d')); // Give the outline the same curve as the road.
+  road.edge.setAttribute('class', 'road-edge'); // Apply the outline's CSS styles.
+  road.edge.setAttribute('aria-hidden', 'true'); // Keep this decoration out of screen reader output.
+  svg.insertBefore(road.edge, roads[0]); // Place the outline behind the colored roads..
 });
-let position = { road: roads[0], distance: 0 };
-let journey = [];
+let position = { road: roads[0], distance: 0 };// Road + distance along the way
+ // Start at distance zero on the first road.
+let journey = []; // Keep a list of walking segments; an empty list means no movement.
 
-function parentRoad(road) {
-  return roads.find(function (p) { return p.dataset.to === road.dataset.from; });
+function parentRoad(road) { // Find the road that leads into this road.
+  return roads.find(function (p) { return p.dataset.to === road.dataset.from; }); // Match the previous road's end node to this road's start node.
 }
 
-function updatePaths() {
-  roads.forEach(function (road) {
-    const parent = parentRoad(road);
+function updatePaths() { // Refresh which parts of the roads and envelopes are visible.
+  roads.forEach(function (road) { // Run this block for each road.
+    const parent = parentRoad(road); // Find the road leading into this one.
 
-    if (!road.unlocked && parent && parent.shown >= parent.length) {
-      road.shown = Math.max(road.shown, Math.min(peek, road.length));
+    if (!road.unlocked && parent && parent.shown >= parent.length) { // Only hint at a locked path once its parent is fully visible.
+      road.shown = Math.max(road.shown, Math.min(peek, road.length)); // Show at least a short entrance, without going past the road's end.
     }
-    road.style.visibility = road.shown > 0 ? 'visible' : 'hidden';
-    road.style.strokeDasharray = road.shown + ' ' + (road.length + 1);
-    road.edge.style.visibility = road.style.visibility;
-    road.edge.style.strokeDasharray = road.style.strokeDasharray;
-    road.setAttribute('tabindex', road.shown > 0 ? '0' : '-1');
-    road.setAttribute('aria-hidden', road.shown === 0);
+    road.style.visibility = road.shown > 0 ? 'visible' : 'hidden'; // Show this path only if some of its length should be visible.
+    road.style.strokeDasharray = road.shown + ' ' + (road.length + 1); // Draw the revealed length, then leave a gap longer than the rest of the road.
+    road.edge.style.visibility = road.style.visibility; // Make the cream outline appear or disappear with its road.
+    road.edge.style.strokeDasharray = road.style.strokeDasharray; // Give the outline the same revealed length as the road.
+    road.setAttribute('tabindex', road.shown > 0 ? '0' : '-1'); // Let Tab reach visible roads, but skip hidden ones.
+    road.setAttribute('aria-hidden', road.shown === 0); // Hide fully hidden roads from screen readers too.
   });
-  envelopes.forEach(function (envelope) {
-    const road = document.getElementById(envelope.dataset.road);
-    envelope.hidden = road.shown < road.length;
-    envelope.stopButton.hidden = envelope.hidden;
-  });
-}
-
-function placeWalker() {
-  const point = position.road.getPointAtLength(position.distance);
-  walker.style.left = point.x / 10 + '%';
-  walker.style.top = point.y / 8.2 + '%';
-  updateEnvelopeAccess();
-}
-
-
-function findRoad(x, y) {
-  let nearest = null;
-  let best = 8 * 1000 / svg.getBoundingClientRect().width;
-  roads.forEach(function (road) {
-    if (road.shown === 0) return;
-
-    for (let start = 0; start < road.shown; start += 4) {
-      const end = Math.min(start + 4, road.shown);
-      const a = road.getPointAtLength(start);
-      const b = road.getPointAtLength(end);
-      const dx = b.x - a.x;
-      const dy = b.y - a.y;
-      const ratio = Math.max(0, Math.min(1, ((x - a.x) * dx + (y - a.y) * dy) / (dx * dx + dy * dy)));
-      const gap = Math.hypot(x - a.x - ratio * dx, y - a.y - ratio * dy);
-      if (gap < best) {
-        best = gap;
-        nearest = { road: road, distance: start + ratio * (end - start) };
-      }
-    }
-  });
-  return nearest;
-}
-
-function routeFromStart(point) {
-  const route = [{ road: point.road, distance: point.distance }];
-  let parent = parentRoad(point.road);
-  while (parent) {
-    route.unshift({ road: parent, distance: parent.length });
-    parent = parentRoad(parent);
-  }
-  return route;
-}
-
-function goTo(target) {
-  target.road.unlocked = true; 
-  const from = routeFromStart(position);
-  const to = routeFromStart(target);
-  let shared = -1;
-  while (from[shared + 1] && to[shared + 1] && from[shared + 1].road === to[shared + 1].road) shared++;
-  journey = [];
-  for (let i = from.length - 1; i > shared; i--) {
-    journey.push({ road: from[i].road, start: from[i].distance, end: 0 });
-  }
-  if (shared >= 0) journey.push({ road: from[shared].road, start: from[shared].distance, end: to[shared].distance });
-  for (let i = shared + 1; i < to.length; i++) {
-    journey.push({ road: to[i].road, start: 0, end: to[i].distance });
-  }
-  journey = journey.filter(function (part) { return Math.abs(part.end - part.start) > 0.01; });
-  const point = target.road.getPointAtLength(target.distance);
-  destination.setAttribute('cx', point.x);
-  destination.setAttribute('cy', point.y);
-  destination.toggleAttribute('hidden', journey.length === 0);
-  walker.classList.toggle('walking', journey.length > 0);
-  statusText.textContent = journey.length > 0 ? 'A little walk, at your own pace.' : arrivalMessage();
-}
-
-svg.addEventListener('click', function (event) {
-  const box = svg.getBoundingClientRect();
-  const target = findRoad((event.clientX - box.left) / box.width * 1000, (event.clientY - box.top) / box.height * 820);
-  if (target) goTo(target);
-});
-
-svg.addEventListener('keydown', function (event) {
-  if ((event.key === 'Enter' || event.key === ' ') && event.target.classList.contains('road')) {
-    event.preventDefault();
-    goTo({ road: event.target, distance: event.target.shown / 2 });
-  }
-});
-
-function stop() {
-  journey = [];
-  destination.setAttribute('hidden', '');
-  walker.classList.remove('walking');
-}
-
-function updateEnvelopeAccess() {
-  envelopes.forEach(function (envelope) {
-    const nearby = position.road.id === envelope.dataset.road && Math.abs(position.distance - envelope.stopDistance) <= 22;
-    envelope.disabled = !nearby;
-    envelope.stopButton.classList.toggle('nearby', nearby);
-    envelope.title = nearby ? 'Open this letter' : 'Walk to the little circle first';
+  envelopes.forEach(function (envelope) { // Run this block for each envelope.
+    const road = document.getElementById(envelope.dataset.road); // Find the road named in this envelope's data-road attribute.
+    envelope.hidden = road.shown < road.length; // Keep the envelope hidden until its road is fully revealed.
+    envelope.stopButton.hidden = envelope.hidden; // Show or hide the nearby stop circle along with the envelope.
   });
 }
 
-envelopes.forEach(function (envelope) {
-  const road = document.getElementById(envelope.dataset.road);
-  const x = parseFloat(envelope.style.left) * 10;
-  const y = parseFloat(envelope.style.top) * 8.2;
-  let nearest = Infinity;
+function placeWalker() { // Move the character's picture to its current road position.
+  const point = position.road.getPointAtLength(position.distance); // Get the map coordinates at the character's distance along the road.
+  walker.style.left = point.x / 10 + '%'; // Convert x from the 1000-unit map to a horizontal percentage.
+  walker.style.top = point.y / 8.2 + '%'; // Convert y from the 820-unit map to a vertical percentage.
+  updateEnvelopeAccess(); // Check which envelopes are now close enough to open.
+}
 
-  for (let distance = 0; distance <= road.length; distance += 2) {
-    const point = road.getPointAtLength(distance);
-    const gap = Math.hypot(point.x - x, point.y - y);
-    if (gap < nearest) {
-      nearest = gap;
-      envelope.stopDistance = distance;
+//Each click does not directly reach the center of the road. 
+//Therefore, this function measures along the road, taking a point every two units and measuring how far it is from the click position respectively, and finally keeping the nearest one.
+function nearestPoint(road, x, y, limit) { // Find an approximate closest point on the allowed part of a road.
+  let result = { distance: 0, gap: Infinity }; // Start with no good match; any real distance will beat Infinity.
+  for (let distance = 0; distance < limit + 2; distance += 2) { // Sample the road every 2 units, including its endpoint.
+    const along = Math.min(distance, limit); // Keep the sample within the allowed length.
+    const point = road.getPointAtLength(along); // Get the coordinates of this sample point.
+    const gap = Math.hypot(point.x - x, point.y - y); // Measure the straight-line distance from this sample to x, y.
+    if (gap < result.gap) { // Keep this sample if it is closer than the previous best.
+      result = { distance: along, gap: gap }; // Save both its distance along the road and its distance from x, y.
     }
   }
-  const point = road.getPointAtLength(envelope.stopDistance);
-  const button = document.createElement('button');
-  button.className = 'postcard-stop';
-  button.style.left = point.x / 10 + '%';
-  button.style.top = point.y / 8.2 + '%';
-  button.setAttribute('aria-label', envelope.getAttribute('aria-label').replace('Open postcard:', 'Walk to postcard:'));
-  button.title = 'Walk here to read the letter';
-  button.onclick = function () { goTo({ road: road, distance: envelope.stopDistance }); };
-  envelope.after(button);
-  envelope.stopButton = button;
-  envelope.onclick = function () {
-    if (envelope.disabled) return;
-    stop();
-    envelope.querySelector('img').src = 'assets/images/envelope2.png';
-    envelope.classList.add('opened');
-    document.getElementById(envelope.dataset.card).showModal();
+  return result; // Give back the closest sample we found.
+}
+
+//Check all visible roads and find the one that is closest and close enough to the click location.
+function findRoad(x, y) { // Look for a visible road close to a map click.
+  let nearest = null; // Start with no road selected.
+  let best = 8 * 1000 / svg.getBoundingClientRect().width; // Convert an 8-screen-pixel click tolerance to horizontal map units.
+  for (const road of roads) { // Check each road one at a time.
+    if (road.shown === 0) continue; // Skip roads that are completely hidden.
+    const point = nearestPoint(road, x, y, road.shown); // Find the closest sample on this road's visible section.
+    if (point.gap < best) { // Accept this road only if it is closer and within the tolerance.
+      best = point.gap; // Remember the new closest distance.
+      nearest = { road: road, distance: point.distance }; // Remember the road and the position along it.
+    }
+  }
+  return nearest; // Return the selected road position, or null if no road is close enough.
+}
+
+//Sort out the road chain from the starting point to a certain position: Start → the current position of the little person, Start → the new target. 
+//Through the common parts of these two routes, you can know at which fork to change direction.
+function routeFromStart(point) { // Build the chain of roads from the starting point to a given position.
+  const route = [{ road: point.road, distance: point.distance }]; // Begin with the road containing that position.
+  let parent = parentRoad(point.road); // Find the road just before it.
+  while (parent) { // Keep working backward while there is a previous road.
+    route.unshift({ road: parent, distance: parent.length }); // Add the previous road to the front of the list.
+    parent = parentRoad(parent); // Move one road farther back toward the start.
+  }
+  return route; // Return the roads in start-to-destination order.
+}
+
+//list the route (list) that the little person should take, unlock the target path, and let it gradually unfold. 
+// Update the position and display status of the target small circle. 
+// Show "On the way." or "Arrival prompt" depending on whether you need to move.
+function goTo(target) { // Plan a new walk to the selected position.
+  target.road.unlocked = true; // Allow the selected road to reveal its full length.
+  const from = routeFromStart(position); // Get the road chain leading to the character's current position.
+  const to = routeFromStart(target); // Get the road chain leading to the new destination.
+  let shared = -1; // Start with no shared road found yet.
+  while (from[shared + 1] && to[shared + 1] && from[shared + 1].road === to[shared + 1].road) { // Compare the two chains until they stop following the same roads.
+    shared++; // Move the shared-road index forward by one.
+  }
+  journey = []; // Clear the old walking plan.
+  for (let i = from.length - 1; i > shared; i--) { // Work backward from the current road toward the shared road.
+    journey.push({ road: from[i].road, start: from[i].distance, end: 0 }); // Add a backward walk to the start of this road.
+  }
+  if (shared >= 0) journey.push({ road: from[shared].road, start: from[shared].distance, end: to[shared].distance }); // Add the section connecting the two positions on their last shared road.
+  for (let i = shared + 1; i < to.length; i++) { // Then work forward through the roads leading to the target.
+    journey.push({ road: to[i].road, start: 0, end: to[i].distance }); // Add a forward walk along this road.
+  }
+  journey = journey.filter(function (part) { return Math.abs(part.end - part.start) > 0.01; }); // Remove segments that are too short to need movement.
+  const point = target.road.getPointAtLength(target.distance); // Find the destination's map coordinates.
+  destination.setAttribute('cx', point.x); // Set the destination circle's horizontal coordinate.
+  destination.setAttribute('cy', point.y); // Set the destination circle's vertical coordinate.
+  destination.toggleAttribute('hidden', journey.length === 0); // Hide the destination marker if there is no walking left to do.
+  statusText.textContent = journey.length > 0 ? 'On the way.' : arrivalMessage(); // Show the walking message, or an arrival message if already there.
+}
+
+// Listen for clicks on the SVG map layer.
+svg.addEventListener('click', function (event) { 
+  const box = svg.getBoundingClientRect(); // Get the SVG's size and position in the browser window.
+  const target = findRoad((event.clientX - box.left) / box.width * 1000, (event.clientY - box.top) / box.height * 820); // Convert the click to map coordinates and look for a nearby road.
+  if (target) goTo(target); // Start a walk only if the click matched a visible road.
+});
+
+svg.addEventListener('keydown', function (event) { // Also allow keyboard interaction with roads.
+  if ((event.key === 'Enter' || event.key === ' ') && event.target.classList.contains('road')) { // Respond to Enter or Space when a road is focused.
+    event.preventDefault(); // Prevent the key's usual browser action, such as scrolling with Space.
+    goTo({ road: event.target, distance: event.target.shown / 2 }); // Walk to the midpoint of the focused road's visible section.
+  }
+});
+
+//Clear the remaining journey, have the little person stop at the current position, and clear the unfinished journey. Hide the target circle.
+function stop() { // Stop walking without resetting discoveries or the character's position.
+  journey = []; // Clear the old walking plan.
+  destination.setAttribute('hidden', ''); // Hide the destination marker.
+}
+
+//Although the envelope is already displayed, it can only be opened after getting close. It will check each envelope one by one, and two conditions need to be met simultaneously 
+//The little person is on the road to which this envelope belongs. 
+//The distance along the way between the little figure and the envelope stop should not exceed 22 map units.
+function updateEnvelopeAccess() { // Check whether each envelope is close enough to open.
+  envelopes.forEach(function (envelope) { // Run this block for each envelope.
+    const nearby = position.road.id === envelope.dataset.road && Math.abs(position.distance - envelope.stopDistance) <= 22; // Require the same road and a distance of at most 22 units from its stop.
+    envelope.disabled = !nearby; // Disable the envelope if the character is too far away.
+    envelope.stopButton.classList.toggle('nearby', nearby); // Add the nearby highlight only when the character is close enough.
+    envelope.title = nearby ? 'Open this letter' : 'Walk to the little circle first'; // Choose the envelope's mouse-hover hint based on distance.
+  });
+}
+
+//Read the position of the envelope - convert it to map coordinates - find the road it belongs to - use nearestPoint() to find the position on the road closest to the envelope 
+// - create a small dot button at this position - set the click operations for the dot and the envelope respectively
+envelopes.forEach(function (envelope) { // Run this block for each envelope.
+  const road = document.getElementById(envelope.dataset.road); // Find the road named in this envelope's data-road attribute.
+  const x = parseFloat(envelope.style.left) * 10; // Convert the envelope's horizontal percentage to map units.
+  const y = parseFloat(envelope.style.top) * 8.2; // Convert the envelope's vertical percentage to map units.
+  envelope.stopDistance = nearestPoint(road, x, y, road.length).distance; // Find the closest place on its road to use as a stopping point.
+  const point = road.getPointAtLength(envelope.stopDistance); // Get that stopping point's coordinates.
+  const button = document.createElement('button'); // Create a button for the little stop circle.
+  button.className = 'postcard-stop'; // Apply the stop circle's CSS styles.
+  button.style.left = point.x / 10 + '%'; // Convert the point's x coordinate to a horizontal percentage.
+  button.style.top = point.y / 8.2 + '%'; // Convert the point's y coordinate to a vertical percentage.
+  button.setAttribute('aria-label', envelope.getAttribute('aria-label').replace('Open postcard:', 'Walk to postcard:')); // Give the stop button a readable name based on its postcard.
+  button.title = 'Walk here to read the letter'; // Set the stop circle's mouse-hover hint.
+  button.onclick = function () { goTo({ road: road, distance: envelope.stopDistance }); }; // Walk to this envelope's stopping point when its circle is clicked.
+  envelope.after(button); // Insert the stop button just after the envelope in the HTML.
+  envelope.stopButton = button; // Save a reference so we can update this stop button later.
+  envelope.onclick = function () { // Run this function when the envelope is clicked.
+    if (envelope.disabled) return; // Do nothing if the envelope is not available yet.
+    stop(); // Stop any remaining movement.
+    envelope.querySelector('img').src = 'assets/images/envelope2.png'; // Swap the closed-envelope picture for the opened one.
+    document.getElementById(envelope.dataset.card).showModal(); // Open the dialog named in this envelope's data-card attribute.
   };
 });
 
-const firstRoad = roads[0];
-const lastRoad = roads.find(function (road) { return road.dataset.to === 'finish'; });
-function connectLandmark(id, road, distance) {
-  const button = document.getElementById(id);
-  const point = road.getPointAtLength(distance);
-  button.style.left = point.x / 10 + '%';
-  button.style.top = point.y / 8.2 + '%';
-  button.onclick = function () { goTo({ road: road, distance: distance }); };
-}
-connectLandmark('start', firstRoad, 0);
-connectLandmark('finish', lastRoad, lastRoad.length);
 
-function arrivalMessage() {
-  if (position.road === lastRoad && position.distance >= lastRoad.length - 2) return 'You’ve arrived. There’s still time to wander.';
-  if (position.road === firstRoad && position.distance < 2) return 'Back at the beginning. Your discoveries are still here.';
-  return 'A moment to look around.';
+//Set up Start/Finish and make them clickable. 1. Place the buttons in the correct positions according to the route coordinates. 
+// 2. Set the button click event. After clicking, call goTo() to go there.
+const firstRoad = roads[0]; // Remember the road containing the start.
+const lastRoad = roads.find(function (road) { return road.dataset.to === 'finish'; }); // Find the road whose end node is named finish.
+function connectLandmark(id, road, distance) { // Position a Start or Finish button and connect its click action.
+  const button = document.getElementById(id); // Find the landmark button by its id.
+  const point = road.getPointAtLength(distance); // Get the landmark's exact point on the road.
+  button.style.left = point.x / 10 + '%'; // Convert the point's x coordinate to a horizontal percentage.
+  button.style.top = point.y / 8.2 + '%'; // Convert the point's y coordinate to a vertical percentage.
+  button.onclick = function () { goTo({ road: road, distance: distance }); }; // Walk to this landmark when its button is clicked.
 }
-window.addEventListener('blur', stop);
-document.addEventListener('visibilitychange', stop);
-window.addEventListener('keydown', function (event) { if (event.key === 'Escape') stop(); });
+connectLandmark('start', firstRoad, 0); // Place Start at the beginning of the first road.
+connectLandmark('finish', lastRoad, lastRoad.length); // Place Finish at the end of the last road.
 
-let previousTime = 0;
-function animate(time) {
-  const seconds = Math.min((time - previousTime) / 1000, 0.05);
-  previousTime = time;
-  let revealing = false;
-  roads.forEach(function (road) {
-    if (road.unlocked && road.shown < road.length) {
-      road.shown = Math.min(road.length, road.shown + revealSpeed * seconds);
-      revealing = true;
+
+function arrivalMessage() { // Choose what to say when the character stops at a destination.
+  if (position.road === lastRoad && position.distance >= lastRoad.length - 2) return 'You’ve arrived. There’s still time to wander.'; // Use the finish message when we are close to the final endpoint.
+  if (position.road === firstRoad && position.distance < 2) return 'Back at the beginning. Your discoveries are still here.'; // Use the start message when we are back at the beginning.
+  for (const envelope of envelopes) { // Check whether any envelope is available here.
+    if (!envelope.hidden && !envelope.disabled) return 'Click the envelope. Notice a little moment.'; // Invite the player to open a visible envelope within reach.
+  }
+  return 'You’re here. Look around, or choose another path.'; // Use the general arrival message otherwise.
+}
+window.addEventListener('blur', stop); // Stop walking when the browser window loses focus.
+document.addEventListener('visibilitychange', stop); // Stop walking when the page's visibility changes, such as switching tabs.
+window.addEventListener('keydown', function (event) { if (event.key === 'Escape') stop(); }); // Stop walking when Escape is pressed.
+
+
+//1. Let the unlocked paths gradually unfold, revealSpeed × seconds,Refresh the visible paths and envelopes if a road grew.
+//2. Advance the position of the little figure according to journey. placeWalker(); Display the new logical location on the map and update the clickable status of nearby envelopes at the same time. 
+//If the entire array of journey is empty: 1. Call stop() to hide the target circle. 2. Call arrivalMessage() to update the arrival prompt.
+let previousTime = 0; // Remember the previous animation frame's timestamp.
+function animate(time) { // Update road reveals and walking for this animation frame.
+  const seconds = Math.min((time - previousTime) / 1000, 0.05); // Convert elapsed milliseconds to seconds, capped at 0.05 to avoid big jumps.
+  previousTime = time; // Save this frame's time for the next update.
+  let revealing = false; // Start by assuming no road needs a visibility update.
+  roads.forEach(function (road) { // Run this block for each road.
+    if (road.unlocked && road.shown < road.length) { // Only extend roads that are unlocked but not fully shown.
+      road.shown = Math.min(road.length, road.shown + revealSpeed * seconds); // Reveal a little more based on time, stopping at the road's full length.
+      revealing = true; // Remember that at least one road has changed.
     }
   });
-  if (revealing) updatePaths();
-  if (journey.length > 0) {
-    const part = journey[0];
-    if (position.road !== part.road) position = { road: part.road, distance: part.start };
-    const remaining = part.end - position.distance;
-    position.distance += Math.sign(remaining) * Math.min(Math.abs(remaining), speed * seconds);
-    placeWalker();
-    if (Math.abs(part.end - position.distance) < 0.01) {
-      journey.shift();
-      if (journey.length === 0) {
-        stop();
-        statusText.textContent = arrivalMessage();
+  if (revealing) updatePaths(); // Refresh the visible paths and envelopes if a road grew.
+  if (journey.length > 0) { // Move only when there are planned walking segments left.
+    const part = journey[0]; // Work on the first remaining segment.
+    if (position.road !== part.road) position = { road: part.road, distance: part.start }; // When entering another segment, start on its road at the planned position.
+    const remaining = part.end - position.distance; // Find the signed distance left; negative means walking backward.
+    position.distance += Math.sign(remaining) * Math.min(Math.abs(remaining), speed * seconds); // Move forward or backward at the set speed without passing the segment's end.
+    placeWalker(); // Update the character's position on screen and its access to envelopes.
+    if (Math.abs(part.end - position.distance) < 0.01) { // Treat the segment as complete once we are within 0.01 map units.
+      journey.shift(); // Remove the completed segment from the front of the plan.
+      if (journey.length === 0) { // Check whether that was the final segment.
+        stop(); // Stop any remaining movement.
+        statusText.textContent = arrivalMessage(); // Show the message for the place we have reached.
       }
     }
   }
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animate); // Ask the browser to run animate on the next animation frame.
 }
-updatePaths();
-placeWalker();
-requestAnimationFrame(animate);
+updatePaths(); // Set the initial road hints and envelope visibility.
+placeWalker(); // Update the character's position on screen and its access to envelopes.
+requestAnimationFrame(animate); // Ask the browser to run animate on the next animation frame.
   </script>
 </body>
 </html>
