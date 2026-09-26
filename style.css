@@ -1,41 +1,41 @@
-* { /* Every element on the page. */
+* {
   box-sizing: border-box; /* Include padding and borders in the stated width and height. */
 }
 
-body { /* The whole page and its two-column layout. */
-  display: flex; /* Use Flexbox to arrange the contents in a row. */
-  flex-wrap: wrap; /* Let items move onto another row when they cannot fit. */
-  align-items: center; /* Center the contents vertically within each flex row. */
-  justify-content: center; /* Center the contents horizontally in this flex row. */
-  gap: 3vw; /* Leave 3% of the window width between the columns. (vw: The width of the visible area of the web page)*/
-  min-height: 100vh; /* Make the page at least as tall as the browser window. */
-  margin: 0; /* Remove the default outer space on all sides. */
-  padding: 24px 4vw; /* Set inner space: 24px top and bottom, 4vw left and right. */
-  background-color: #f5f3eb; /* Use #f5f3eb as the background color. */
-  color: #34483f; /* Use #34483f for the text color. */
-  font-family: Georgia, 'Times New Roman', serif; /* Use Georgia; the other fonts are backups if it is unavailable. */
-  line-height: 1.6; /* Make each text line 1.6 times the font size tall. */
+body { /* A single introduction column beside the large map. */
+  display: flex; /* Arrange the left column and map side by side. */
+  flex-wrap: wrap; /* Let the columns wrap on smaller screens. */
+  align-items: center; /* Center the side notes beside the map. */
+  justify-content: center; /* Center the whole composition. */
+  gap: 44px; /* Separate the text column from the map. */
+  margin: 0; /* Remove default page margins. */
+  padding: 24px 28px; /* Leave a quiet border around the page. */
+  min-height: 100vh; /* Fill the window. */
+  background-color: #f5f3eb; /* Keep the warm paper color. */
+  color: #34483f; /* Use dark green text. */
+  font-family: Georgia, 'Times New Roman', serif; /* Keep a shared font. */
+  line-height: 1.6; /* Space text comfortably. */
 }
 
-header { /* The left column: title, intro, and instructions. */
-  flex: 1 1 360px; /* Grow with a weight of 1, allow shrinking with a weight of 1, and start from 360px. */
-  max-width: 380px; /* Keep the width at or below 380px. */
-  padding: 24px 0; /* Set inner space: 24px top and bottom, 0 left and right. */
-  text-align: left; /* Align text to the left. */
+header { /* The title, message, and help centered beside the map. */
+  align-self: center; /* Keep the whole left column vertically centered. */
+  flex: 0 1 260px; /* Keep the title and companion in one comfortable column. */
+  text-align: left; /* Keep the title like a book heading. */
 }
 
 
-h1 { /* The main Along the Way title. */
-  margin: 0; /* Remove the default outer space on all sides. */
-  font-size: 68px; /* Set the text size to 68px. */
-  font-weight: normal; /* Use regular weight rather than bold. */
-  line-height: 0.98; /* Make each text line 0.98 times the font size tall. */
-  letter-spacing: -3px; /* Adjust the space between letters by -3px to bring them closer. */
+h1 { /* The two-line title beside the map. */
+  margin: 0; /* Remove heading margins. */
+  font-size: 68px; /* Give the title enough presence beside the large map. */
+  font-weight: normal; /* Keep the lettering light. */
+  line-height: 1; /* Keep the two large title lines close together. */
+  letter-spacing: -2px; /* Tighten the large letters slightly. */
 }
 
-h1 span { /* The second line of the title: the Way. */
-  display: block; /* Use a block box; for images, this also removes the inline baseline gap. */
-  margin-top: 8px; /* Leave 8px of outer space on the top. */
+h1 span { /* Keep the Way together on a second line. */
+  display: block; /* Start a new line. */
+  margin-top: 8px; /* Separate the title lines. */
+  white-space: nowrap; /* Keep these two words together. */
 }
 
 h1 em { /* The word Way in the title. */
@@ -43,21 +43,10 @@ h1 em { /* The word Way in the title. */
   font-weight: normal; /* Use regular weight rather than bold. */
 }
 
-.introduction { /* The sentence below the main title. */
-  max-width: 260px; /* Keep the width at or below 260px. */
-  margin: 24px 0 0; /* Set outer space: 24px top, 0 left and right, 0 bottom. */
-  padding-top: 20px; /* Add 20px of inner space on the top. */
-  border-top: 1px solid #d5d6c7; /* Draw a 1px solid border in #d5d6c7 on the top. */
-  color: #727967; /* Use #727967 for the text color. */
-  font-size: 18px; /* Set the text size to 18px. */
-  line-height: 1.7; /* Make each text line 1.7 times the font size tall. */
-}
-
-main { /* The right column: status text and map. */
-  flex: 2 1 460px; /* Grow with a weight of 2, allow shrinking with a weight of 1, and start from 460px. When there is still extra space on the same line and no width limit is encountered, it will be allocated more additional space than the header.
-It's not that the map is always twice as wide as the left side, but when allocating the "extra space", the ratio is 2:1.*/
-  max-width: 94vh; /* Limit the width to 94% of the window height to help the map fit.(vh: The height of the visible area of the web page)*/
-  min-width: 0; /* Allow this column to shrink below its content's usual minimum width. */
+main { /* The large central map. */
+  flex: 1 1 540px; /* Give most of the width to the map. */
+  max-width: calc(122vh - 64px); /* Fit the full map within the window height. */
+  min-width: 0; /* Allow shrinking when space is tight. */
 }
 
 .campus-map { /* The frame around the campus map. */
@@ -87,6 +76,7 @@ button:focus-visible { /* Buttons when keyboard focus needs to be visible. */
 .finish { /* The Start and Finish signs. */
   position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
   z-index: 4; /* Use map layer 4; higher-numbered sibling layers appear in front. */
+  white-space: nowrap; /* Keep Finish and its flag together on one line. */
   padding: 3px 10px; /* Set inner space: 3px top and bottom, 10px left and right. */
   border: 1px solid #7d947e; /* Draw a 1px solid border in #7d947e on all sides. */
   border-radius: 5px; /* Round the corners by 5px. */
@@ -233,52 +223,19 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
   visibility: hidden; /* Start with this road hidden; the script controls its reveal later. */
 }
 
-.walk-controls { /* The instructions box on the left. */
-  margin-top: 24px; /* Leave 24px of outer space on the top. */
-  max-width: 380px; /* Keep the width at or below 380px. */
-  padding: 18px 20px; /* Set inner space: 18px top and bottom, 20px left and right. */
-  border-left: 4px solid #d56842; /* Draw a 4px solid border in #d56842 on the left. */
-  border-radius: 4px; /* Round the corners by 4px. */
-  background-color: #fff9ed; /* Use #fff9ed as the background color. */
+.walk-feedback { /* The message and help below the title. */
+  margin-top: 30px; /* Separate the quiet message from the large title. */
+  text-align: left; /* Align all the sidebar text together. */
 }
 
-.walk-controls h2 { /* The instructions heading. */
-  margin: 0 0 12px; /* Set outer space: 0 top, 0 left and right, 12px bottom. */
-  color: #34483f; /* Use #34483f for the text color. */
-  font-size: 22px; /* Set the text size to 22px. */
-  font-weight: normal; /* Use regular weight rather than bold. */
-  line-height: 1.25; /* Make each text line 1.25 times the font size tall. */
-}
-
-.walk-controls ol { /* The numbered instructions list. */
-  margin: 0; /* Remove the default outer space on all sides. */
-  padding-left: 20px; /* Add 20px of inner space on the left. */
-  font-size: 14px; /* Set the text size to 14px. */
-  line-height: 1.6; /* Make each text line 1.6 times the font size tall. */
-}
-
-.walk-controls li { /* Each numbered instruction. */
-  padding-left: 3px; /* Add 3px of inner space on the left. */
-  margin: 7px 0; /* Set outer space: 7px top and bottom, 0 left and right. */
-}
-
-.walk-feedback { /* The wrapper around the changing message. */
-  margin-bottom: 6px; /* Leave 6px of outer space on the bottom. */
-  padding: 0 12px; /* Set inner space: 0 top and bottom, 12px left and right. */
-  text-align: center; /* Center the text horizontally. */
-}
-
-#walk-status { /* The changing message above the map; # selects its id. */
-  display: flex; /* Use Flexbox to arrange the contents in a row. */
-  align-items: flex-end; /* Place the message at the bottom of its fixed-height box. */
-  justify-content: center; /* Center the contents horizontally in this flex row. */
-  height: 54px; /* Reserve a steady 54px for messages so changing text does not move the map. */
-  margin: 0; /* Remove the default outer space on all sides. */
-  color: #526451; /* Use #526451 for the text color. */
-  font-size: 19px; /* Set the text size to 19px. */
-  font-style: italic; /* Slant the text into italics. */
-  font-weight: bold; /* Make the text bold. */
-  line-height: 1.4; /* Make each text line 1.4 times the font size tall. */
+#walk-status { /* The changing message in the left column. */
+  height: 84px; /* Reserve three lines so the sidebar stays still as messages change. */
+  margin: 0 0 4px; /* Keep the help action close to the message area. */
+  color: #526451; /* Use the familiar green. */
+  font-size: 18px; /* Keep the companion message readable beside the title. */
+  font-style: italic; /* Give it a gentle voice. */
+  font-weight: bold; /* Keep enough weight to stand out. */
+  line-height: 1.5; /* Let the short lines breathe. */
 }
 
 .source-link { /* The link to the original lecture notes. */
@@ -390,4 +347,177 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
 
 .postcard-stop[hidden] { /* Stop circles with the hidden attribute. */
   display: none; /* Hide this element completely and remove its layout space. */
+}
+
+.help-button { /* The understated link-like button that reopens help. */
+  padding: 4px 0; /* Keep a small comfortable click area. */
+  border: 0; /* Remove the pill-shaped frame. */
+  border-bottom: 1px solid #b7bda9; /* Underline the help action. */
+  background: transparent; /* Blend into the page. */
+  color: #69735f; /* Keep help quieter than the message. */
+  font-size: 14px; /* Use a small supporting size. */
+}
+
+.tutorial { /* A small note in the map's upper-left corner. */
+  position: absolute; /* Position the note relative to the map. */
+  top: 16px; /* Leave space inside the map frame. */
+  left: 16px; /* Keep the note in the upper-left corner. */
+  z-index: 5; /* Place it above the map's roads and buttons. */
+  width: 310px; /* Keep the instructions compact. */
+  max-width: calc(100% - 32px); /* Fit within a narrow map. */
+  padding: 22px; /* Leave space around the text. */
+  border: 1px solid #d5d6c7; /* Frame the note softly. */
+  border-radius: 6px; /* Round the paper corners slightly. */
+  background: #fffdf4; /* Use the same warm paper color. */
+  color: #34483f; /* Keep the text dark green. */
+  box-shadow: 0 4px 16px #34483f1a; /* Add a light paper shadow. */
+  font-size: 14px; /* Keep the hints small but readable. */
+}
+
+.tutorial[hidden] { /* Hide help after clicking Let’s wander. */
+  display: none; /* Remove the card from view. */
+}
+
+.tutorial h2 { /* The short invitation at the top of the card. */
+  margin: 0 0 20px; /* Separate the heading from the instructions. */
+  font-size: 22px; /* Make the note heading clear without being loud. */
+  font-weight: normal; /* Match the main title's light weight. */
+  line-height: 1.3; /* Keep a wrapped heading compact. */
+}
+
+.tutorial ol { /* The three small hints. */
+  margin: 0 0 24px; /* Leave space before the action button. */
+  padding-left: 22px; /* Leave room for the list numbers. */
+}
+
+.tutorial li { /* Each hint gets a little breathing room. */
+  margin: 10px 0; /* Separate the three steps. */
+}
+
+
+.begin-walk { /* The main button that closes help and starts exploring. */
+  width: 100%; /* Span the card's content area. */
+  padding: 10px 18px; /* Give the button a comfortable size. */
+  border: 1px solid #526451; /* Match the button background. */
+  border-radius: 6px; /* Round its corners gently. */
+  background-color: #526451; /* Make the main action easy to find. */
+  color: #fffdf4; /* Use light text on the green button. */
+}
+
+.help-button:hover { /* A small response when hovering over help. */
+  background-color: #e9efdc; /* Add a light green fill. */
+}
+
+.begin-walk:hover { /* A small response when hovering over Let’s wander. */
+  background-color: #40523f; /* Darken the button slightly. */
+}
+
+.tutorial-close { /* The close cross in the tutorial's upper-right corner. */
+  position: absolute; /* Position the button inside the tutorial card. */
+  top: 4px; /* Keep the cross above the heading. */
+  right: 6px; /* Place it near the right edge. */
+  width: 28px; /* Give the cross a comfortable click area. */
+  height: 28px; /* Keep the button square. */
+  padding: 0; /* Center the symbol without extra padding. */
+  border: 0; /* Remove the default button frame. */
+  background: transparent; /* Show only the cross. */
+  color: #69735f; /* Match the quiet green text. */
+  font-size: 22px; /* Keep the symbol easy to see. */
+  line-height: 1; /* Keep the cross centered vertically. */
+}
+
+.tutorial-close:hover { /* Show a gentle response on hover. */
+  color: #34483f; /* Darken the cross when the mouse is over it. */
+}
+
+@media (max-width: 700px) { /* Use these adjustments on phones and narrow windows. */
+  body {
+    display: flex; /* Stack the phone layout vertically. */
+    flex-direction: column; /* Put each page section on its own row. */
+    align-items: stretch; /* Let each section use the available width. */
+    justify-content: center; /* Balance the short phone stack in the middle of the screen instead of leaving the bottom empty. */
+    gap: 16px; /* Keep a consistent gap between sections. */
+    padding: 20px 12px; /* Give the map more of the small screen. */
+    min-height: 100dvh; /* Center against the visible phone area, not the space behind browser bars. */
+  }
+
+  header {
+    display: contents; /* Let the title, help, and status join the phone layout directly. */
+  }
+
+  h1 {
+    order: 0; /* Keep the title first. */
+    font-size: 55px; /* Keep the two-line title clear on phones. */
+    letter-spacing: -1px; /* Use gentler spacing at this smaller size. */
+    text-align: center;
+  }
+
+  h1 span {
+    display: block; /* Keep the Way on the second line. */
+    margin-top: 6px; /* Leave a small gap between title lines. */
+  }
+
+  .walk-feedback {
+    display: contents; /* Allow the status to sit below the map without duplicating it. */
+  }
+
+  #walk-status {
+    order: 3; /* Place the changing message after the map. */
+    text-align: center; /* Center the message beneath the map. */
+    height: 54px; /* Reserve two lines for changing messages. */
+    font-size: 16px; /* Fit the short messages comfortably on a phone. */
+  }
+
+  main {
+    order: 2; /* Put the map between help and the status message. */
+    flex: none; /* Remove the desktop flex base height in this vertical layout. */
+    width: 100%; /* Let the map fill the available page width. */
+    max-width: none; /* Do not limit phone map width by window height. */
+  }
+
+  .help-button {
+    order: 1; /* Keep help near the title, above the map. */
+    align-self: center; /* Center the help link under the centered title. */
+  }
+
+  .campus-map {
+    border-width: 4px; /* Use a thinner frame to leave more space for the map. */
+  }
+
+  .envelope {
+    width: 34px; /* Shrink the envelope on the smaller map so it stops crowding the roads. */
+    height: 34px; /* Match the height to the width. */
+    transform: translate(calc(-50% + var(--nudge-x, 0) * 12px), calc(-50% + var(--nudge-y, 0) * 12px)); /* Nudge each envelope just clear of its stop circle, keeping the two close together. */
+  }
+
+  .start,
+  .finish {
+    padding: 3px 6px; /* Keep the single-line signs compact near the map edges. */
+    font-size: 11px; /* Reduce the signs slightly on the smaller map. */
+  }
+
+  .tutorial {
+    top: 8px; /* Tuck the help card into the map corner. */
+    left: 8px; /* Match its top inset. */
+    max-width: calc(100% - 16px); /* Keep the whole card within the map width. */
+    padding: 20px; /* Keep the note compact. */
+  }
+
+  .postcard {
+    padding: 64px 28px 120px; /* Keep the photo and message clear of the vertical paper's frame lines. */
+    background-image: url('assets/images/postcard2.png'); /* Use the portrait postcard artwork on phones. */
+    background-size: 122% 113%; /* Stretch the portrait paper until its decorated edges bleed just past the card. */
+    gap: 16px; /* Bring the photo and its caption closer. */
+  }
+
+  .postcard-photo,
+  .postcard-message {
+    flex-basis: 100%; /* Put the photo above the message on phones. */
+    min-width: 0; /* Let both fit inside a narrow postcard. */
+  }
+
+  .postcard-photo {
+    width: 100%; /* Use the full postcard content width. */
+    max-height: 35vh; /* Leave room to read the caption beneath the photo. */
+  }
 }
