@@ -2,64 +2,92 @@
   box-sizing: border-box; /* Include padding and borders in the stated width and height. */
 }
 
-body { /* A single introduction column beside the large map. */
-  display: flex; /* Arrange the left column and map side by side. */
-  flex-wrap: wrap; /* Let the columns wrap on smaller screens. */
-  align-items: center; /* Center the side notes beside the map. */
-  justify-content: center; /* Center the whole composition. */
-  gap: 44px; /* Separate the text column from the map. */
-  margin: 0; /* Remove default page margins. */
-  padding: 24px 28px; /* Leave a quiet border around the page. */
-  min-height: 100vh; /* Fill the window. */
-  background-color: #f5f3eb; /* Keep the warm paper color. */
-  color: #34483f; /* Use dark green text. */
-  font-family: Georgia, 'Times New Roman', serif; /* Keep a shared font. */
-  line-height: 1.6; /* Space text comfortably. */
+body {
+  margin: 0;
+  padding: 40px 32px 40px 432px;
+  min-height: 100vh;
+  overflow-y: hidden; /* Prevent vertical scrolling of the whole page; popup content keeps its own scrolling. */
+  background-color: #f5f3eb;
+  color: #34483f;
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.6;/*The height occupied by each line of text is 1.6 times the font size.*/
+  transition: padding-left 0.3s ease;/*When the blank space on the left side of the body changes, make the change complete smoothly within 0.3 seconds.
+  ease: It starts and ends relatively slowly, but is faster in the middle.*/
 }
+body.sidebar-collapsed { padding-left: 32px; }/*When the body has the sidebar-collapsed class, change the left margin of it to 32px.*/
 
-header { /* The title, message, and help centered beside the map. */
-  align-self: center; /* Keep the whole left column vertically centered. */
-  flex: 0 1 260px; /* Keep the title and companion in one comfortable column. */
-  text-align: left; /* Keep the title like a book heading. */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0; /* Same fixed sidebar position, written as four separate sides. */
+  z-index: 6;
+  width: calc(432px + max(0px, (100vw - 464px - min(1000px, 122vh - 130px)) / 2));
+  /*Adjust the sidebar according to the size of the window to match the centered map*/
+  padding: 88px 44px 48px;
+  display: flex;
+  overflow-y: auto;
+  background: #f5f3eb;
+  transition: transform 0.3s ease, visibility 0.3s;
 }
+.sidebar-content { width: 100%; max-width: 312px; margin: auto; }
+.sidebar h1 { width: fit-content; margin: 0 auto; text-align: left; }
+.sidebar-collapsed .sidebar { transform: translateX(-100%); visibility: hidden; }/*Move the sidebar's own width to the left by 100%, that is, move the entire sidebar out of the window.*/
+.sidebar-toggle {/*button*/
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 7;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid #aab29e;
+  border-radius: 10px;
+  background: #fffdf4;
+  color: #526451;
+  font-size: 22px;
+  transition: background-color 0.2s;
+}
+.sidebar-toggle:hover { background: #e9efdc; }
 
 
 h1 { /* The two-line title beside the map. */
   margin: 0; /* Remove heading margins. */
-  font-size: 68px; /* Give the title enough presence beside the large map. */
+  font-size: 68px; 
   font-weight: normal; /* Keep the lettering light. */
-  line-height: 1; /* Keep the two large title lines close together. */
-  letter-spacing: -2px; /* Tighten the large letters slightly. */
+  line-height: 1;
 }
 
-h1 span { /* Keep the Way together on a second line. */
+h1 span { /* 'the Way' on a second line */
   display: block; /* Start a new line. */
-  margin-top: 8px; /* Separate the title lines. */
-  white-space: nowrap; /* Keep these two words together. */
+  margin-top: 8px;
 }
 
-h1 em { /* The word Way in the title. */
-  color: #7a8869; /* Use #7a8869 for the text color. */
+h1 em { /* Way */
+  color: #7a8869;
   font-weight: normal; /* Use regular weight rather than bold. */
 }
 
-main { /* The large central map. */
-  flex: 1 1 540px; /* Give most of the width to the map. */
-  max-width: calc(122vh - 64px); /* Fit the full map within the window height. */
-  min-width: 0; /* Allow shrinking when space is tight. */
+main {
+  width: 100%;
+  max-width: min(1000px, calc(122vh - 130px)); /* Keep the map within both the original width and window-height limits. */
+  /*122vh-130px: Limit the map width according to the window height to prevent the map from being too high.*/
+  margin: 0 auto;
+  min-width: 0;
 }
 
-.campus-map { /* The frame around the campus map. */
+.campus-map { /* The figure groups the campus map with its interactive paths and letters. */
+  margin: 0; /* Remove the default figure margin to preserve the original map position. */
   position: relative; /* Keep this in the layout and use it as a reference for positioned children. The placement of the envelope, the little figure, Start and Finish should be based on this map box. (position: absolute;)*/
-  border: 8px solid #fffdf7; /* Draw a 8px solid border in #fffdf7 on all sides. */
-  border-radius: 5px; /* Round the corners by 5px. */
+  border: 8px solid #fffdf7; 
+  border-radius: 5px; 
   box-shadow: 0 14px 40px #34483f12; /* Add a shadow: 0 sideways, 14px down, 40px blur; the color includes opacity. */
 }
 
 .campus-map > img { /* The map image only; > means direct child. */
   display: block; /* Use a block box; for images, this also removes the inline baseline gap. */
-  width: 100%; /* Set the width to 100% of the containing area. */
-  border-radius: 2px; /* Round the corners by 2px. */
+  width: 100%; 
+  border-radius: 2px;
 }
 
 button { /* All buttons on the website. */
@@ -75,14 +103,14 @@ button:focus-visible { /* Buttons when keyboard focus needs to be visible. */
 .start,
 .finish { /* The Start and Finish signs. */
   position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
-  z-index: 4; /* Use map layer 4; higher-numbered sibling layers appear in front. */
+  z-index: 4;
   white-space: nowrap; /* Keep Finish and its flag together on one line. */
-  padding: 3px 10px; /* Set inner space: 3px top and bottom, 10px left and right. */
-  border: 1px solid #7d947e; /* Draw a 1px solid border in #7d947e on all sides. */
-  border-radius: 5px; /* Round the corners by 5px. */
-  background-color: #fffdf0; /* Use #fffdf0 as the background color. */
-  color: #405e4b; /* Use #405e4b for the text color. */
-  font-size: 12px; /* Set the text size to 12px. */
+  padding: 3px 10px;
+  border: 1px solid #7d947e; 
+  border-radius: 5px; 
+  background-color: #fffdf0; 
+  color: #405e4b; 
+  font-size: 12px; 
   box-shadow: 0 2px 4px #34483f18; /* Add a shadow: 0 sideways, 2px down, 4px blur; the color includes opacity. */
 }
 
@@ -95,13 +123,13 @@ button:focus-visible { /* Buttons when keyboard focus needs to be visible. */
 }
 
 .start::before,
-.finish::after { /* The little posts attached to both signs. */
+.finish::after { /* The little posts attached to both signs. 两根小线*/
   content: ''; /* Create an empty decorative piece for ::before or ::after. */
-  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
-  left: 50%; /* Place this 50% from the left edge of its positioning box. */
-  width: 1px; /* Set the width to 1px. */
-  height: 10px; /* Set the height to 10px. */
-  background-color: #7d947e; /* Use #7d947e as the background color. */
+  position: absolute; 
+  left: 50%; 
+  width: 1px; 
+  height: 10px; 
+  background-color: #7d947e; 
 }
 
 .start::before { /* The post above Start. */
@@ -113,22 +141,24 @@ button:focus-visible { /* Buttons when keyboard focus needs to be visible. */
 }
 
 .start:hover,
-.finish:hover { /* Both signs when the mouse is over them. */
-  background-color: #e9efdc; /* Use #e9efdc as the background color. */
+.finish:hover { 
+  background-color: #e9efdc; 
 }
 
 dialog { /* The popup container for each postcard. */
-  width: 900px; /* Set the width to 900px. */
-  max-width: 94%; /* Keep the width at or below 94% of the containing area. */
-  max-height: 90vh; /* Limit the height to 90% of the browser window. */
-  padding: 0; /* Remove the default inner space on all sides. */
-  border: 0; /* Remove the default border. */
+  width: 900px; 
+  max-width: 94%; 
+  max-height: 90vh; 
+  padding: 0; 
+  border: 0; 
   background: transparent; /* Remove the visible background so the content underneath can show. */
   color: inherit; /* Use the parent element's text color. */
+  border-radius: 18px;
+  overflow: visible;
 }
 
 dialog::backdrop { /* The dim layer behind an open postcard. */
-  background-color: #23392db3; /* Use #23392db3 as the background color (the last two digits set opacity). */
+  background-color: #23392db3;
 }
 
 .postcard { /* The postcard paper, photo, and text layout. */
@@ -137,62 +167,66 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
   flex-wrap: wrap; /* Let items move onto another row when they cannot fit. */
   align-items: center; /* Center the contents vertically within each flex row. */
   gap: 28px; /* Leave 28px between the flex items. */
-  min-height: 480px; /* Keep this at least 480px tall; it can grow if needed. */
-  padding: 85px 7% 60px; /* Set inner space: 85px top, 7% left and right, 60px bottom. */
-  background-color: #fffdf4; /* Use #fffdf4 as the background color. */
-  background-image: url('assets/images/postcard.png'); /* Use the postcard artwork as the background behind the photo and message. */
-  background-position: center; /* Center the postcard background image. */
-  background-size: 143% 143%; /* Scale the background to 143% of the area in both directions. */
+  min-height: 480px; 
+  padding: 85px 7% 60px; 
+  background-color: #fffdf4; 
+  background-image: url('assets/images/postcard.png'); 
+  background-position: center; 
+  background-size: 143% 143%; 
   background-repeat: no-repeat; /* Show the background image once instead of tiling it. */
+  border-radius: 18px; max-height: 90vh; overflow: auto;
 }
 
 .close { /* The Close button inside a postcard. */
-  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
-  top: 26px; /* Place this 26px from the top edge of its positioning box. */
-  right: 7%; /* Place this 7% from the right edge of its positioning box. */
-  padding: 4px 12px; /* Set inner space: 4px top and bottom, 12px left and right. */
-  border: 1px solid #a9b099; /* Draw a 1px solid border in #a9b099 on all sides. */
-  border-radius: 4px; /* Round the corners by 4px. */
-  background-color: #fffdf4; /* Use #fffdf4 as the background color. */
-  color: #34483f; /* Use #34483f for the text color. */
-  font-size: 14px; /* Set the text size to 14px. */
+  position: absolute; 
+  top: 26px;
+  right: 7%; 
+  padding: 4px 12px;
+  border: 1px solid #a9b099; 
+  border-radius: 4px;
+  background-color: #fffdf4; 
+  color: #34483f; 
+  font-size: 14px; 
 }
 
 .close:hover { /* The Close button when hovered. */
-  background-color: #eaeedf; /* Use #eaeedf as the background color. */
+  background-color: #eaeedf; 
 }
 
 .postcard-photo { /* The photo inside a postcard. */
-  flex: 1 1 240px; /* Grow with a weight of 1, allow shrinking with a weight of 1, and start from 240px. */
-  width: 45%; /* Set the width to 45% of the containing area. */
-  max-width: 100%; /* Keep the width at or below 100% of the containing area. */
-  max-height: 340px; /* Keep this no taller than 340px. */
+  flex: 1 1 240px; /* Allow this column to use extra space. */ /* Allow it to shrink when space is limited. */ /* Start with the same 240px basis before distributing space. */
+  width: 45%; 
+  max-width: 100%; 
+  max-height: 340px; 
   object-fit: contain; /* Keep the whole image visible without stretching or cropping it. */
 }
 
 .postcard-message { /* The text column inside a postcard. */
-  flex: 1 1 240px; /* Grow with a weight of 1, allow shrinking with a weight of 1, and start from 240px. */
+  flex: 1 1 240px; /* Allow this column to use extra space. */ /* Allow it to shrink when space is limited. */ /* Start with the same 240px basis before distributing space. */
 }
 
 .postcard-message h2 { /* The title inside a postcard message. */
-  margin: 12px 0; /* Set outer space: 12px top and bottom, 0 left and right. */
-  font-size: 28px; /* Set the text size to 28px. */
+  margin: 12px 0; 
+  font-size: 28px; 
   font-weight: normal; /* Use regular weight rather than bold. */
-  line-height: 1.2; /* Make each text line 1.2 times the font size tall. */
+  line-height: 1.2; 
 }
 
 .credit { /* The photographer or source credit. */
   margin-top: 22px; /* Leave 22px of outer space on the top. */
-  color: #69735f; /* Use #69735f for the text color. */
-  font-size: 13px; /* Set the text size to 13px. */
-  font-style: italic; /* Slant the text into italics. */
+  color: #69735f; 
+  font-size: 13px; 
+  font-style: italic; 
 }
 
 .routes { /* The SVG path layer over the map. */
   position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
-  inset: 0; /* Set top, right, bottom, and left to zero. */
-  width: 100%; /* Set the width to 100% of the containing area. */
-  height: 100%; /* Set the height to 100% of the containing area. */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
   touch-action: manipulation; /* Allow touch scrolling and pinch zoom, but not double-tap zoom. */
 }
 
@@ -205,8 +239,8 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
 
 .road-edge { /* The cream outline behind each road; added by the script. */
   fill: none; /* Do not fill the inside of the SVG shape; draw only its line. */
-  stroke: #fff8e8; /* Color the SVG line or border #fff8e8. */
-  stroke-width: 12; /* Make the SVG line 12 map units wide; it scales with the map. */
+  stroke: #fff8e8; 
+  stroke-width: 12;
   stroke-linecap: round; /* Round off the ends of the road. */
   stroke-linejoin: round; /* Round off corners where line segments meet. */
   pointer-events: none; /* Let mouse clicks pass through this element. */
@@ -214,45 +248,41 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
 }
 
 .main-road { /* The main route. */
-  stroke: #d56842; /* Color the SVG line or border #d56842. */
+  stroke: #d56842; 
 }
 
 .side-road { /* The side routes. */
-  stroke: #168f9c; /* Color the SVG line or border #168f9c. */
-  stroke-width: 6; /* Make the SVG line 6 map units wide; it scales with the map. */
+  stroke: #168f9c;
+  stroke-width: 6; 
   visibility: hidden; /* Start with this road hidden; the script controls its reveal later. */
 }
 
-.walk-feedback { /* The message and help below the title. */
-  margin-top: 30px; /* Separate the quiet message from the large title. */
-  text-align: left; /* Align all the sidebar text together. */
-}
-
-#walk-status { /* The changing message in the left column. */
-  height: 84px; /* Reserve three lines so the sidebar stays still as messages change. */
-  margin: 0 0 4px; /* Keep the help action close to the message area. */
-  color: #526451; /* Use the familiar green. */
-  font-size: 18px; /* Keep the companion message readable beside the title. */
-  font-style: italic; /* Give it a gentle voice. */
-  font-weight: bold; /* Keep enough weight to stand out. */
-  line-height: 1.5; /* Let the short lines breathe. */
+#walk-status {
+  min-height: 32px;
+  margin: 0 0 18px;
+  text-align: center;
+  color: #526451;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 1.5;
 }
 
 .source-link { /* The link to the original lecture notes. */
-  color: #315e64; /* Use #315e64 for the text color. */
-  font-size: 14px; /* Set the text size to 14px. */
+  color: #315e64; 
+  font-size: 14px; 
   text-underline-offset: 3px; /* Place the link underline 3px below its usual text reference position. */
 }
 
 #destination { /* The destination marker on the road. */
-  fill: #fffdf7; /* Fill the inside of the SVG circle with #fffdf7. */
-  stroke: #8d6248; /* Color the SVG line or border #8d6248. */
-  stroke-width: 2; /* Make the SVG line 2 map units wide; it scales with the map. */
+  fill: #fffdf7; 
+  stroke: #8d6248;
+  stroke-width: 2; 
   pointer-events: none; /* Let mouse clicks pass through this element. */
 }
 
 #destination[hidden] { /* The destination marker when it has the hidden attribute. */
-  display: none; /* Hide this element completely and remove its layout space. */
+  display: none;
 }
 
 .road { /* Extra interaction styles for all roads. */
@@ -268,52 +298,38 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
   stroke: #365e70; /* Color the SVG line or border #365e70. */
 }
 
-.walker { /* The whole little character. */
-  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
-  z-index: 3; /* Use map layer 3; higher-numbered sibling layers appear in front. */
-  width: 24px; /* Set the width to 24px. */
-  height: 30px; /* Set the height to 30px. */
+.walker { /* The figure groups the two poses of the little character. */
+  margin: 0; /* Remove the default figure margin to preserve the traveler position. */
+  position: absolute; 
+  z-index: 3;
+  width: 30px; 
+  height: 62px; 
   transform: translate(-50%, -90%); /* Center the character horizontally and lift it so its feet sit near the path. */
   pointer-events: none; /* Let mouse clicks pass through this element. */
   filter: drop-shadow(0 2px 2px #34483f66); /* Add a soft shadow that follows the visible shape, including transparent edges. */
 }
 
-.walker-body { /* The blue body of the character. */
-  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
-  left: 5px; /* Place this 5px from the left edge of its positioning box. */
-  bottom: 0; /* Place this 0 from the bottom edge of its positioning box. */
-  width: 14px; /* Set the width to 14px. */
-  height: 20px; /* Set the height to 20px. */
-  border: 2px solid #fffdf7; /* Draw a 2px solid border in #fffdf7 on all sides. */
-  border-radius: 7px 7px 4px 4px; /* Round the corners: top-left 7px, top-right 7px, bottom-right 4px, bottom-left 4px. */
-  background-color: #344f60; /* Use #344f60 as the background color. */
-}
-
-.walker-hat { /* The tan hat of the character. */
-  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
-  top: 0; /* Place this 0 from the top edge of its positioning box. */
-  width: 24px; /* Set the width to 24px. */
-  height: 15px; /* Set the height to 15px. */
-  border: 2px solid #fffdf7; /* Draw a 2px solid border in #fffdf7 on all sides. */
-  border-radius: 50%; /* Make a circle if width equals height, or an oval if they differ. */
-  background-color: #d9b575; /* Use #d9b575 as the background color. */
-}
+/* Switch between the walking and idle GIFs. */
+.walker img { width: 100%; height: 100%; object-fit: contain; }
+.walker-moving { display: none; }
+.walker.moving .walker-idle { display: none; }
+.walker.moving .walker-moving { display: block; }
 
 .envelope { /* The envelope buttons on the map. */
-  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
-  z-index: 2; /* Use map layer 2; higher-numbered sibling layers appear in front. */
+  position: absolute; 
+  z-index: 2; 
   transform: translate(-50%, -50%); /* Center this on its coordinate by shifting left and up by half its own size. */
-  width: 48px; /* Set the width to 48px. */
-  height: 48px; /* Set the height to 48px. */
-  padding: 0; /* Remove the default inner space on all sides. */
-  border: 0; /* Remove the default border. */
+  width: 48px; 
+  height: 48px;
+  padding: 0; 
+  border: 0; 
   background: transparent; /* Remove the visible background so the content underneath can show. */
 }
 
 .envelope img { /* The image inside each envelope button. */
   display: block; /* Use a block box; for images, this also removes the inline baseline gap. */
-  width: 100%; /* Set the width to 100% of the containing area. */
-  height: 100%; /* Set the height to 100% of the containing area. */
+  width: 100%; 
+  height: 100%; 
   object-fit: contain; /* Keep the whole image visible without stretching or cropping it. */
 }
 
@@ -327,21 +343,21 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
 }
 
 .postcard-stop { /* The small stopping circles; added by the script. */
-  position: absolute; /* Place this using coordinates inside its nearest positioned ancestor. */
-  z-index: 2; /* Use map layer 2; higher-numbered sibling layers appear in front. */
-  width: 17px; /* Set the width to 17px. */
-  height: 17px; /* Set the height to 17px. */
-  padding: 0; /* Remove the default inner space on all sides. */
+  position: absolute; 
+  z-index: 2;
+  width: 17px; 
+  height: 17px; 
+  padding: 0; 
   transform: translate(-50%, -50%); /* Center this on its coordinate by shifting left and up by half its own size. */
-  border: 3px solid #fffdf1; /* Draw a 3px solid border in #fffdf1 on all sides. */
-  border-radius: 50%; /* Make a circle if width equals height, or an oval if they differ. */
-  background-color: #d56842; /* Use #d56842 as the background color. */
+  border: 3px solid #fffdf1; 
+  border-radius: 50%; 
+  background-color: #d56842; 
   box-shadow: 0 0 0 1px #89573e, 0 2px 4px #34483f22; /* Draw two shadows: an outer ring, plus a soft shadow below. */
 }
 
 .postcard-stop:hover,
 .postcard-stop.nearby { /* A stop circle when hovered or given the nearby class. */
-  background-color: #168f9c; /* Use #168f9c as the background color. */
+  background-color: #168f9c;
   box-shadow: 0 0 0 2px #fffdf1, 0 0 0 3px #168f9c; /* Draw two shadows: an outer ring, plus another ring. */
 }
 
@@ -349,136 +365,179 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
   display: none; /* Hide this element completely and remove its layout space. */
 }
 
-.help-button { /* The understated link-like button that reopens help. */
-  padding: 4px 0; /* Keep a small comfortable click area. */
-  border: 0; /* Remove the pill-shaped frame. */
-  border-bottom: 1px solid #b7bda9; /* Underline the help action. */
-  background: transparent; /* Blend into the page. */
-  color: #69735f; /* Keep help quieter than the message. */
-  font-size: 14px; /* Use a small supporting size. */
+/* A quiet guide below the title, with small numbered markers. */
+.tutorial {
+  margin-top: 48px;
+  padding-top: 30px;
+  border-top: 1px solid #cdd4c1;
+  font-size: 15px;
+}
+.tutorial h2 {
+  margin: 0 0 24px;
+  color: #6b785f;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.tutorial ol { margin: 0; padding: 0; list-style: none; counter-reset: explore-step; }/*Counterreset: explore-step Create a CSS counter called explore-step and start from the default 0.*/
+.tutorial li {
+  display: flex;
+  align-items: baseline;/*in one line*/
+  gap: 14px;
+  margin: 20px 0;
+  color: #52604c;
+  line-height: 1.6;
+  counter-increment: explore-step;/*Each time a li is encountered, the counter increases by 1, thus obtaining 1, 2, and 3.*/
+}
+.tutorial li::before {
+  content: counter(explore-step);
+  flex: 0 0 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #e2e7d7;
+  color: #637356;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 26px;
+  text-align: center;
 }
 
-.tutorial { /* A small note in the map's upper-left corner. */
-  position: absolute; /* Position the note relative to the map. */
-  top: 16px; /* Leave space inside the map frame. */
-  left: 16px; /* Keep the note in the upper-left corner. */
-  z-index: 5; /* Place it above the map's roads and buttons. */
-  width: 310px; /* Keep the instructions compact. */
-  max-width: calc(100% - 32px); /* Fit within a narrow map. */
-  padding: 22px; /* Leave space around the text. */
-  border: 1px solid #d5d6c7; /* Frame the note softly. */
-  border-radius: 6px; /* Round the paper corners slightly. */
-  background: #fffdf4; /* Use the same warm paper color. */
-  color: #34483f; /* Keep the text dark green. */
-  box-shadow: 0 4px 16px #34483f1a; /* Add a light paper shadow. */
-  font-size: 14px; /* Keep the hints small but readable. */
+.desktop-begin-walk {/*Let's wander*/
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 18px;
+  border: 1px solid #526451;
+  border-radius: 16px; 
+  background: #526451;
+  color: #fffdf4;
+  font-size: 15px;
+}
+.desktop-begin-walk:hover { background: #40523f; }
+.desktop-begin-walk[hidden] { display: none; }
+
+.mobile-help-button, .mobile-help { display: none; }/*By default, the help button and help pop-up of the phone are hidden on the desktop*/
+
+#walk-status.all-found {/*Final*/
+  white-space: pre-line;
+  padding: 12px 14px;
+  border-left: 3px solid #b58b45;
+  border-radius: 8px;
+  background: #f3ead4;
+  color: #795b2b;
+  font-family: Georgia, serif;
+  font-style: normal;
+  animation: discovery-glow 0.7s ease both;
 }
 
-.tutorial[hidden] { /* Hide help after clicking Let’s wander. */
-  display: none; /* Remove the card from view. */
-}
-
-.tutorial h2 { /* The short invitation at the top of the card. */
-  margin: 0 0 20px; /* Separate the heading from the instructions. */
-  font-size: 22px; /* Make the note heading clear without being loud. */
-  font-weight: normal; /* Match the main title's light weight. */
-  line-height: 1.3; /* Keep a wrapped heading compact. */
-}
-
-.tutorial ol { /* The three small hints. */
-  margin: 0 0 24px; /* Leave space before the action button. */
-  padding-left: 22px; /* Leave room for the list numbers. */
-}
-
-.tutorial li { /* Each hint gets a little breathing room. */
-  margin: 10px 0; /* Separate the three steps. */
-}
-
-
-.begin-walk { /* The main button that closes help and starts exploring. */
-  width: 100%; /* Span the card's content area. */
-  padding: 10px 18px; /* Give the button a comfortable size. */
-  border: 1px solid #526451; /* Match the button background. */
-  border-radius: 6px; /* Round its corners gently. */
-  background-color: #526451; /* Make the main action easy to find. */
-  color: #fffdf4; /* Use light text on the green button. */
-}
-
-.help-button:hover { /* A small response when hovering over help. */
-  background-color: #e9efdc; /* Add a light green fill. */
-}
-
-.begin-walk:hover { /* A small response when hovering over Let’s wander. */
-  background-color: #40523f; /* Darken the button slightly. */
-}
-
-.tutorial-close { /* The close cross in the tutorial's upper-right corner. */
-  position: absolute; /* Position the button inside the tutorial card. */
-  top: 4px; /* Keep the cross above the heading. */
-  right: 6px; /* Place it near the right edge. */
-  width: 28px; /* Give the cross a comfortable click area. */
-  height: 28px; /* Keep the button square. */
-  padding: 0; /* Center the symbol without extra padding. */
-  border: 0; /* Remove the default button frame. */
-  background: transparent; /* Show only the cross. */
-  color: #69735f; /* Match the quiet green text. */
-  font-size: 22px; /* Keep the symbol easy to see. */
-  line-height: 1; /* Keep the cross centered vertically. */
-}
-
-.tutorial-close:hover { /* Show a gentle response on hover. */
-  color: #34483f; /* Darken the cross when the mouse is over it. */
-}
-
-@media (max-width: 700px) { /* Use these adjustments on phones and narrow windows. */
-  body {
-    display: flex; /* Stack the phone layout vertically. */
-    flex-direction: column; /* Put each page section on its own row. */
-    align-items: stretch; /* Let each section use the available width. */
-    justify-content: center; /* Balance the short phone stack in the middle of the screen instead of leaving the bottom empty. */
-    gap: 16px; /* Keep a consistent gap between sections. */
-    padding: 20px 12px; /* Give the map more of the small screen. */
-    min-height: 100dvh; /* Center against the visible phone area, not the space behind browser bars. */
+/* --- Medium-sized Screen --- */
+@media (max-width: 1000px) { /* Apply these rules when the browser window is 1000px wide or narrower */
+  body, body.sidebar-collapsed { 
+    display: flex;
+    flex-direction: column; /* Stack the title area and main content vertically instead of placing them side by side. */
+    height: 100dvh;
+    min-height: 0;
+    padding: 16px 12px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
   }
-
-  header {
-    display: contents; /* Let the title, help, and status join the phone layout directly. */
+  .sidebar, .sidebar-collapsed .sidebar { /*Cover the sidebar Settings of the desktop*/
+    position: static; /* Return the sidebar to normal document flow; it no longer stays fixed at the left of the window. */
+    width: 100%; 
+    padding: 0; 
+    overflow: visible; 
+    transform: none; /* Cancel the desktop slide-out transform */
+    visibility: visible; /* Cancel the desktop hidden state so the title remains visible. */
   }
-
-  h1 {
-    order: 0; /* Keep the title first. */
-    font-size: 55px; /* Keep the two-line title clear on phones. */
-    letter-spacing: -1px; /* Use gentler spacing at this smaller size. */
+  .sidebar-content { /* The box containing the title and the small-screen help button. */
+    max-width: none; 
     text-align: center;
   }
-
-  h1 span {
-    display: block; /* Keep the Way on the second line. */
-    margin-top: 6px; /* Leave a small gap between title lines. */
+  .sidebar .tutorial, .sidebar-toggle { /* The desktop instructions and sidebar menu button. */
+    display: none; 
+  }
+  .mobile-help-button { /* The How to explore button  */
+    display: inline-block; 
+    color: #526451;
+    font-size: 14px;
+    margin-top: 14px;
+    padding: 4px 0;
+    border: 0;
+    border-bottom: 1px solid #aab29e;
+    border-radius: 0;
+    background: transparent;
+  }
+  .mobile-help { /* The instruction popup placed over the map. JavaScript controls its hidden attribute. */
+    display: block; 
+    position: absolute; 
+    z-index: 5;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); /* Move left by half the popup's own width and up by half its height, centering it on the map. */
+    width: 310px; 
+    max-width: calc(100% - 24px); /* Limit the width to the map's available width minus 24px, leaving about 12px on each side when centered. */
+    padding: 22px;
+    border: 1px solid #d5d6c7; 
+    border-radius: 12px; 
+    background: #fffdf4; 
+    box-shadow: 0 6px 24px #34483f26; 
+    font-size: 14px;
+    max-height: calc(100dvh - 32px); overflow-y: auto;
+  }
+  .mobile-help[hidden] { /* Select the help popup when it has the hidden attribute. */
+    display: none; 
+  }
+  .mobile-help h2 { /* The heading inside the help popup. */
+    margin: 0 0 14px;
+    font-size: 22px; 
+    font-weight: normal; 
+  }
+  .mobile-help ol { /* The numbered instruction list inside the popup. */
+    padding-left: 20px; 
+    margin: 0 0 18px; 
+  }
+  .mobile-help li { /* Each individual instruction in that list. */
+    margin: 8px 0; 
+  }
+  .mobile-help-close { /* The small close button in the popup's upper-right corner. */
+    position: absolute; 
+    top: 4px; 
+    right: 6px; 
+    width: 30px; 
+    height: 30px; 
+    padding: 0; 
+    border: 0;
+    background: transparent; 
+    color: #69735f; 
+    font-size: 24px; 
+  }
+  .mobile-begin-walk { /* The Let's wander button at the bottom of the help popup. */
+    width: 100%; 
+    padding: 8px;
+    border: 0; 
+    border-radius: 6px; 
+    background: #526451; 
+    color: #fffdf4; 
   }
 
-  .walk-feedback {
-    display: contents; /* Allow the status to sit below the map without duplicating it. */
-  }
+  .sidebar { flex: 0 0 auto; }
 
-  #walk-status {
-    order: 3; /* Place the changing message after the map. */
-    text-align: center; /* Center the message beneath the map. */
-    height: 54px; /* Reserve two lines for changing messages. */
-    font-size: 16px; /* Fit the short messages comfortably on a phone. */
-  }
+  .sidebar h1 { font-size: clamp(36px, 7dvh, 60px); }
 
-  main {
-    order: 2; /* Put the map between help and the status message. */
-    flex: none; /* Remove the desktop flex base height in this vertical layout. */
-    width: 100%; /* Let the map fill the available page width. */
-    max-width: none; /* Do not limit phone map width by window height. */
-  }
+  /* Scale with window height, keeping the original 36px–60px limits. */
+  main { flex: 0 0 auto;
+    width: min(100%, 800px, calc((100dvh - 320px) * 1.22)); /* Choose the smallest limit; reserve 320px for the title and controls, then use the map width/height ratio. */
+    max-width: 100%; }
 
-  .help-button {
-    order: 1; /* Keep help near the title, above the map. */
-    align-self: center; /* Center the help link under the centered title. */
-  }
+  #walk-status { min-height: 24px; font-size: 16px; margin: 0 0 12px; }
+}
+
+/* -- The smallest Screen -- */
+@media (max-width: 700px) { /* Use these adjustments on phones and narrow windows. */
+  .walker { width: 24px; height: 52px; }
 
   .campus-map {
     border-width: 4px; /* Use a thinner frame to leave more space for the map. */
@@ -496,13 +555,6 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
     font-size: 11px; /* Reduce the signs slightly on the smaller map. */
   }
 
-  .tutorial {
-    top: 8px; /* Tuck the help card into the map corner. */
-    left: 8px; /* Match its top inset. */
-    max-width: calc(100% - 16px); /* Keep the whole card within the map width. */
-    padding: 20px; /* Keep the note compact. */
-  }
-
   .postcard {
     padding: 64px 28px 120px; /* Keep the photo and message clear of the vertical paper's frame lines. */
     background-image: url('assets/images/postcard2.png'); /* Use the portrait postcard artwork on phones. */
@@ -517,7 +569,86 @@ dialog::backdrop { /* The dim layer behind an open postcard. */
   }
 
   .postcard-photo {
-    width: 100%; /* Use the full postcard content width. */
-    max-height: 35vh; /* Leave room to read the caption beneath the photo. */
+    width: 100%;
+    max-height: 35vh; 
   }
 }
+
+/*--- landscape screen ---*/
+/* It is used for shorter Windows such as landscape screens on mobile phones to further reduce the title, spacing and prompt text*/
+@media (max-width: 1000px) and (max-height: 500px) {
+  body, body.sidebar-collapsed { padding: 10px 12px; gap: 8px; }
+  .sidebar h1 { font-size: 32px; }
+  .sidebar h1 span { display: inline; margin-top: 0; }
+  .mobile-help-button { margin-top: 8px; }
+  main { width: min(100%, calc((100dvh - 210px) * 1.22)); }
+  #walk-status { font-size: 14px; margin-bottom: 8px; }
+  #walk-status.all-found { padding: 6px 8px; }
+}
+
+/* --- Animations --- */
+
+/* Mirror both poses when the traveler heads right. 小人向右走时翻转图片*/
+.walker.facing-right img { transform: scaleX(-1); }
+
+/* Opening sequence: enlarge the closed envelope, replace it with the open-envelope
+   image, then reveal the letter. dialog[open] selects a dialog with the open attribute.
+   Both animations last 1.2 seconds and start when the dialog opens.
+   forwards keeps the last animation frame's values after the animation finishes. */
+dialog[open] .postcard { animation: paper-arrives 1.2s forwards; }
+.letter-opening {
+  position: absolute;
+  z-index: 2;
+  left: calc(50% - 110px);
+  top: calc(50% - 110px);
+  width: 220px;
+  height: 220px;
+  background: url('assets/images/envelope.png') center / contain no-repeat;
+  pointer-events: none;
+}
+dialog[open] .letter-opening { animation: open-envelope 1.2s forwards; }
+
+@keyframes open-envelope {
+  0% { transform: scale(0.2); }
+  45% { transform: scale(1); background-image: url('assets/images/envelope.png'); }
+  50%, 80% { transform: scale(1); background-image: url('assets/images/envelope2.png'); opacity: 1; }
+  100% { transform: scale(1); background-image: url('assets/images/envelope2.png'); opacity: 0; }
+}
+@keyframes paper-arrives {
+  0%, 80% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes discovery-glow {/*The fade-in animation for completing all tasks*/
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#finish-firework {
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 960px;
+  max-width: 94vw;
+  max-height: 80dvh;
+  object-fit: contain;
+  pointer-events: none;
+}
+#finish-firework[hidden] { display: none; }
+
+/* Keep the music control at the upper-right corner without moving the page layout. */
+#music-button {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 7;
+  padding: 6px 12px;
+  border: 1px solid #aab29e;
+  border-radius: 10px;
+  background: #fffdf4;
+  color: #526451;
+  font-size: 14px;
+}
+#music-button:hover { background: #e9efdc; }

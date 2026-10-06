@@ -4,50 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Along the Way</title>
+  <link rel="icon" type="image/png" href="assets/images/envelope.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Along <span>the <em>Way</em></span></h1>
-  <div class="walk-feedback" aria-label="Walking companion">
-    <p id="walk-status" role="status">There’s no hurry to arrive.</p>
-    <button id="open-tutorial" class="help-button" type="button">How to explore</button>
-  </div>
+  <button id="music-button" type="button">Music ▶</button>
+  <button id="toggle-sidebar" class="sidebar-toggle" type="button" aria-controls="sidebar" aria-expanded="true" aria-label="Collapse sidebar">☰</button>
+  <header id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+      <h1>Along <span>the <em>Way</em></span></h1>
+      <section class="tutorial" aria-labelledby="tutorial-title">
+        <h2 id="tutorial-title">How to explore</h2>
+        <ol>
+          <li>Click a path to walk there.</li>
+          <li>Notice a side path? Follow it.</li>
+          <li>Stop at a circle, then open its envelope.</li>
+        </ol>
+        <button id="desktop-begin-walk" class="desktop-begin-walk" type="button">Let’s wander !</button>
+      </section>
+      <button id="mobile-help-button" class="mobile-help-button" type="button" aria-controls="mobile-help" aria-expanded="false">How to explore</button>
+    </div>
   </header>
 
-
-
   <main>
+    <p id="walk-status" role="status">There’s no hurry to arrive.</p>
     <section aria-label="Explore small moments around Duke">
-      <div class="campus-map">
-  <section id="tutorial" class="tutorial" aria-labelledby="tutorial-title">
-    <button id="close-tutorial" class="tutorial-close" type="button" aria-label="Close tutorial">×</button>
-    <h2 id="tutorial-title">A little help before you wander</h2>
-    <ol>
-      <li>Click a path to walk there.</li>
-      <li>Notice a side path?</li>
-      <li>Stop at a circle. Notice an envelope?</li>
-    </ol>
-    <button id="begin-walk" class="begin-walk" type="button">Let’s wander</button>
-  </section>
+      <figure class="campus-map">
+        <section id="mobile-help" class="mobile-help" aria-labelledby="mobile-help-title" hidden>
+          <button id="close-mobile-help" class="mobile-help-close" type="button" aria-label="Close exploration tips">×</button>
+          <h2 id="mobile-help-title">How to explore</h2>
+          <ol>
+            <li>Click a path to walk there.</li>
+            <li>Notice a side path? Follow it.</li>
+            <li>Stop at a circle, then open its envelope.</li>
+          </ol>
+          <button id="mobile-begin-walk" class="mobile-begin-walk" type="button">Let’s wander</button>
+        </section>
         <img src="assets/images/map.jpg" alt="An illustrated map of Duke campus with paths, buildings, and green spaces.">
         <svg class="routes" viewBox="0 0 1000 820" preserveAspectRatio="none" aria-label="Walking paths"><!--preserveAspectRatio:Allow this coordinate area to scale horizontally and vertically respectively to fill the display area of the SVG.-->
+          <defs> <!--Small arrow-->
+            <marker id="path-continues" viewBox="-4 -4 18 18" refX="9" refY="5" markerWidth="32" markerHeight="32" markerUnits="userSpaceOnUse" orient="auto">
+              <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#fff8e8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#168f9c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </marker>
+          </defs>
           <path id="m1" class="road main-road" data-from="start" data-to="west-junction" d="M 100 690 Q 147 611 230 580 T 430 540" role="button" aria-label="Main path, lower campus" /><!--bezier curve, curve of the second degree-->
           <path id="m2" class="road main-road" data-from="west-junction" data-to="south-junction" d="M 430 540 Q 494 523 535 495" role="button" aria-label="Main path, central campus" />
           <path id="m3" class="road main-road" data-from="south-junction" data-to="north-junction" d="M 535 495 Q 567 467 580 415" role="button" aria-label="Main path, toward the chapel" />
           <path id="m4" class="road main-road" data-from="north-junction" data-to="east-junction" d="M 580 415 C 590 366 612 281 675 213" role="button" aria-label="Main path, upper campus" />
           <path id="m5" class="road main-road" data-from="east-junction" data-to="finish" d="M 675 213 Q 778 129 885 75" role="button" aria-label="Main path to the finish" />
           <path id="west-entry" class="road side-road" data-from="west-junction" data-to="west-fork" d="M 430 540 C 365 528 288 466 253 415" role="button" aria-label="A turning to the west" />
-          <path id="west-upper" class="road side-road" data-from="west-fork" data-to="west-end" d="M 253 415 C 234 389 237 337 220 303 S 142 239 45 235" role="button" aria-label="The upper western path" />
+          <path id="west-upper" class="road side-road" data-continues="true" data-from="west-fork" data-to="west-end" d="M 253 415 C 234 389 237 337 220 303 S 142 239 45 235 L 20 234" role="button" aria-label="The upper western path; Victory Fireworks is farther beyond the map" />
           <path id="west-left" class="road side-road" data-from="west-fork" data-to="kitten" d="M 253 415 Q 173 447 100 517" role="button" aria-label="A small path to the left" />
           <path id="north-path" class="road side-road" data-from="north-junction" data-to="north-end" d="M 580 415 C 517 416 467 427 420 410 S 342 350 320 252 S 299 127 355 80" role="button" aria-label="A turning to the north" />
           <path id="south-entry" class="road side-road" data-from="south-junction" data-to="south-fork" d="M 535 495 Q 561 512 575 542" role="button" aria-label="A turning to the south" />
-          <path id="south-lower" class="road side-road" data-from="south-fork" data-to="south-end" d="M 575 542 Q 625 618 640 775" role="button" aria-label="The lower southern path" />
+          <path id="south-lower" class="road side-road" data-continues="true" data-from="south-fork" data-to="south-end" d="M 575 542 Q 625 618 640 775 L 642 800" role="button" aria-label="The lower southern path; Seagull by the Waves is farther beyond the map" />
           <path id="south-left" class="road side-road" data-from="south-fork" data-to="raccoon" d="M 575 542 C 487 566 462 653 407 718 S 284 792 197 724" role="button" aria-label="A small path around the lawn" />
           <path id="east-path" class="road side-road" data-from="east-junction" data-to="east-end" d="M 675 213 C 730 211 775 243 792 304 S 802 367 800 400" role="button" aria-label="A turning to the east" />
           <circle id="destination" r="7" hidden aria-hidden="true" /> <!--hidden: Indicate initial hiding-->
         </svg>
-        <span id="walker" class="walker" role="img" aria-label="You, a little traveler"><span class="walker-body"></span><span class="walker-hat"></span></span>
+        <figure id="walker" class="walker" role="img" aria-label="You, a little traveler"><img class="walker-idle" src="assets/gif/idle.gif" alt=""><img class="walker-moving" src="assets/gif/walking1.gif" alt=""></figure>
         <button id="start" class="start" aria-label="Walk back to the start">Start</button>
         <button id="finish" class="finish" aria-label="Walk to the finish">Finish ⚑</button>
         <button class="envelope" data-road="north-path" data-card="postcard-1" style="left: 42%; top: 54%;" hidden aria-label="Open postcard: Chapel at Dusk"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
@@ -56,7 +72,7 @@
         <button class="envelope" data-road="west-left" data-card="postcard-4" style="left: 7%; top: 67%;" hidden aria-label="Open postcard: A Tiny Kitten"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
         <button class="envelope" data-road="west-upper" data-card="postcard-5" style="left: 19%; top: 38%;" hidden aria-label="Open postcard: Hidden Capybaras"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
         <button class="envelope" data-road="south-left" data-card="postcard-6" style="left: 16%; top: 88%;" hidden aria-label="Open postcard: Raccoons Behind Edens"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
-        <button class="envelope" data-road="north-path" data-card="postcard-7" style="left: 39%; top: 8%;" hidden aria-label="Open postcard: The Pluto of Prime Numbers"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
+        <button class="envelope" data-road="north-path" data-card="postcard-7" style="left: 39%; top: 8%;" hidden aria-label="Open postcard: Humor Hidden in the Notes"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
         <button class="envelope" data-road="north-path" data-card="postcard-8" style="left: 38%; top: 41%;" hidden aria-label="Open postcard: Backstage at Bryan Center"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
         <button class="envelope" data-road="west-entry" data-card="postcard-9" style="left: 40%; top: 60%;" hidden aria-label="Open postcard: Before a Song Was Just a Click"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
         <button class="envelope" data-road="west-left" data-card="postcard-10" style="left: 20%; top: 51%;" hidden aria-label="Open postcard: Fire Clouds over the Quad"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
@@ -68,230 +84,264 @@
         <button class="envelope" data-road="south-lower" data-card="postcard-16" style="left: 67%; top: 92%;" hidden aria-label="Open postcard: Seagull by the Waves"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
         <button class="envelope" data-road="west-upper" data-card="postcard-17" style="left: 7%; top: 25%;" hidden aria-label="Open postcard: Victory Fireworks"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
         <button class="envelope" data-road="south-left" data-card="postcard-18" style="left: 34%; top: 95%;" hidden aria-label="Open postcard: Punk Party Near the Museum"><img src="assets/images/envelope.png" alt="" draggable="false"></button>
-      </div>
+      </figure>
     </section>
 
     <dialog id="postcard-1" aria-labelledby="title-1">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-1').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Ada_Chapel.jpg" alt="Duke Chapel at dusk, under a softly glowing red sky." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-1">Chapel at Dusk</h2>
           <p>A soft red glow settled over Duke Chapel as I walked home from class—an ordinary evening made unforgettable by a moment I almost missed.</p>
           <p class="credit">Noticed by Ada</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-2" aria-labelledby="title-2">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-2').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Vanessa_Rainbow_Brodhead.jpg" alt="A band of rainbow light on the ground at Brodhead Center." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-2">Rainbow at Brodhead</h2>
           <p>In front of Brodhead Center, sunlight through the glass cast a rainbow band across the ground, and friends stopped together to watch amid the noise.</p>
           <p class="credit">Noticed by Vanessa</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-3" aria-labelledby="title-3">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-3').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Vanessa_Alpaca_FewQuad.jpg" alt="A small alpaca plush resting on a railing near Few Quad." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-3">Alpaca on the Railing</h2>
           <p>A small alpaca plush lay on the stair railing near Few Quad, gazing into the distance as if it had found its own quiet view.</p>
           <p class="credit">Noticed by Vanessa</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-4" aria-labelledby="title-4">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-4').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Vanessa_Kitten_Wannamaker.jpg" alt="A tiny kitten on the path behind Wannamaker." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-4">A Tiny Kitten</h2>
           <p>A tiny kitten, only a few months old, crossed the path behind Wannamaker with a soft, milky meow that made the whole moment feel gentle.</p>
           <p class="credit">Noticed by Vanessa</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-5" aria-labelledby="title-5">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-5').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Vanessa_Capybara_Wellness.jpg" alt="Wooden details at the Wellness Center resembling capybara faces." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-5">Hidden Capybaras</h2>
           <p>The wooden decoration at the Wellness Center entrance looks, if you look closely, like a row of gentle capybara faces waiting to be noticed.</p>
           <p class="credit">Noticed by Vanessa</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-6" aria-labelledby="title-6">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-6').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Ada_Raccoon_Edens.jpg" alt="A glimpse of raccoons on the path behind Edens." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-6">Raccoons Behind Edens</h2>
           <p>On my way to the laundry room, I met three tiny raccoons on the path behind Edens 2C; they disappeared too fast to photograph well, but the surprise stayed with me.</p>
           <p class="credit">Noticed by Ada</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-7" aria-labelledby="title-7">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-7').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/COMPSCI231_InductionJoke.jpg" alt="COMPSCI 231 lecture notes with the aside: 1 is the Pluto of Prime numbers.">
-        <div class="postcard-message">
-          <h2 id="title-7">The Pluto of Prime Numbers</h2>
+        <section class="postcard-message">
+          <h2 id="title-7">Humor Hidden in the Notes</h2>
           <p>In the COMPSCI 231 notes, the professor jokes that &quot;1 is the Pluto of Prime numbers.&quot; If your goal is to finish quickly by asking AI for a summary, you get the definitions and proofs—but not the joke. That small aside is a creative touch that reveals the professor&#x27;s humor and makes the math feel human.</p>
           <p class="credit">From COMPSCI 231 lecture notes, Duke University</p>
           <a class="source-link" href="https://donaldlab.cs.duke.edu/Teaching/discretemath/F2026/lectures/l03-iteration-recursion-induction.txt" target="_blank" rel="noopener">Read the original notes ↗</a>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-8" aria-labelledby="title-8">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-8').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Sherry_BryanCenter_Backstage.jpg" alt="A view backstage at the Bryan Center theater." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-8">Backstage at Bryan Center</h2>
           <p>From the second floor of the Bryan Center theater, the backstage view opened up like a hidden world—grand, quiet, and full of stories.</p>
           <p class="credit">Noticed by Sherry</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-9" aria-labelledby="title-9">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-9').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/Sherry_PreInternetStory.jpg" alt="A screenshot of Sherry’s Pre-internet Story website." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-9">Before a Song Was Just a Click</h2>
           <p>Sherry&#x27;s website tells how her mother wrote down lyrics by hand before the internet. If your goal is to finish quickly by asking AI to summarize it, you get the plot—but not the floating lyrics or the pulsing characters. Those are the small design touches the author wanted viewers to notice, and those details are the feeling.</p>
           <p class="credit">Noticed by Sherry</p>
           <a class="source-link" href="https://sherryc929.github.io/Pre-internet-Story/" target="_blank" rel="noopener">Visit Sherry’s original story ↗</a>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-10" aria-labelledby="title-10">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-10').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Sherry_Quad_Sunset.jpg" alt="Sunset clouds over the campus quad." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-10">Fire Clouds over the Quad</h2>
           <p>On the central quad, students played beneath European-style buildings and a sky of burning sunset clouds—an evening that felt endless.</p>
           <p class="credit">Noticed by Sherry</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-11" aria-labelledby="title-11">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-11').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Sherry_Weathervane_Perkins.jpg" alt="The Reading Blue Devil weathervane above Perkins." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-11">Reading Blue Devil</h2>
           <p>Above the von der Heyden Pavilion at Perkins, the Reading Blue Devil weathervane stood against sunset clouds, holding a book as if enjoying the view.</p>
           <p class="credit">Noticed by Sherry</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-12" aria-labelledby="title-12">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-12').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Sherry_YouAreLoved_KilgoQuad.jpg" alt="The words YOU ARE LOVED on a campus wall." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-12">YOU ARE LOVED</h2>
           <p>On the wall of the corridor connecting Kilo Quad House and the dining hall, three simple words greeted passersby: YOU ARE LOVED.</p>
           <p class="credit">Noticed by Sherry</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-13" aria-labelledby="title-13">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-13').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/Talia_CrapeMyrtle_SANDS.jpg" alt="Pink crape myrtles beside the SANDS sign." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-13">Crape Myrtles by SANDS</h2>
           <p>Beside the SANDS Research Building sign, a whole tree of pink crape myrtles bloomed—scentless, yet visually spectacular.</p>
           <p class="credit">Noticed by Talia</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-14" aria-labelledby="title-14">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-14').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Talia_Squirrel_Shade.jpg" alt="A squirrel resting in the shade." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-14">Squirrel in the Shade</h2>
           <p>After lunch, a small squirrel lay in the cool shade of a tree, perfectly content to let the afternoon pass slowly.</p>
           <p class="credit">Noticed by Talia</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-15" aria-labelledby="title-15">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-15').close()" aria-label="Close postcard">Close ×</button>
         <img class="postcard-photo" src="assets/images/web/Vanessa_Plane_WestCampus.jpg" alt="A plane’s trail in the sky above campus trees." loading="lazy">
-        <div class="postcard-message">
+        <section class="postcard-message">
           <h2 id="title-15">Plane Above the Trees</h2>
           <p>On the road out of West Campus, the sky was impossibly clear. Sunlight slipped through the treetops as a plane left a thin trail above.</p>
           <p class="credit">Noticed by Vanessa</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-16" aria-labelledby="title-16">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-16').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/web/Erin_Seagull_MarineLab.jpg" alt="A seagull above the shore near the Marine Lab." loading="lazy">
-        <div class="postcard-message">
+        <video class="postcard-photo" src="assets/videos/Erin_Seagull_MarineLab.mp4" poster="assets/images/web/Erin_Seagull_MarineLab.jpg" aria-label="A seagull above the shore near the Marine Lab." muted playsinline preload="none"></video>
+        <section class="postcard-message">
           <h2 id="title-16">Seagull by the Waves</h2>
           <p>Near the Marine Lab, a seagull flew over the shore as waves broke against the edge—a quick, bright moment caught by Erin.</p>
           <p class="credit">Noticed by Erin</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-17" aria-labelledby="title-17">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-17').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/web/Sherry_Football_Fireworks.jpg" alt="Fireworks over the football stadium." loading="lazy">
-        <div class="postcard-message">
+        <video class="postcard-photo" src="assets/videos/Sherry_Football_Fireworks.mp4" poster="assets/images/web/Sherry_Football_Fireworks.jpg" aria-label="Fireworks over the football stadium." muted playsinline preload="none"></video>
+        <section class="postcard-message">
           <h2 id="title-17">Victory Fireworks</h2>
           <p>When Duke won, fireworks rose over the stadium and the whole crowd erupted—joy shared in one loud, bright instant.</p>
           <p class="credit">Noticed by Sherry</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
     <dialog id="postcard-18" aria-labelledby="title-18">
-      <div class="postcard">
+      <div class="letter-opening" aria-hidden="true"></div>
+      <article class="postcard">
         <button class="close" onclick="document.getElementById('postcard-18').close()" aria-label="Close postcard">Close ×</button>
-        <img class="postcard-photo" src="assets/images/web/Sherry_PunkParty_Museum.jpg" alt="A band performing near the museum." loading="lazy">
-        <div class="postcard-message">
+        <video class="postcard-photo" src="assets/videos/Sherry_PunkParty_Museum.mp4" poster="assets/images/web/Sherry_PunkParty_Museum.jpg" aria-label="A band performing near the museum." muted playsinline preload="none"></video>
+        <section class="postcard-message">
           <h2 id="title-18">Punk Party Near the Museum</h2>
           <p>Near the museum, a punk band played as voices and music rose together—a lively pocket of campus energy caught on a loop.</p>
           <p class="credit">Noticed by Sherry</p>
-        </div>
-      </div>
+        </section>
+      </article>
     </dialog>
 
   </main>
+  <img id="finish-firework" alt="" aria-hidden="true" hidden>
+  <audio id="bgm" src="assets/bgm.mp3" loop preload="auto"></audio> <!-- Loop the background music without adding a visible player. -->
   <script>
+const bgm = document.getElementById('bgm'); // The looping background music.
+bgm.volume = 0.2; // Play at 20% volume.
+document.getElementById('music-button').onclick = function () {
+  if (bgm.paused) { // Click to play or resume from the paused position.
+    bgm.play();
+    this.textContent = 'Music ❚❚'; // Show the pause symbol while playing.
+  } else {
+    bgm.pause();
+    this.textContent = 'Music ▶'; // Show the play symbol while paused.
+  }
+};
 const svg = document.querySelector('.routes'); // querySelector(...) According to the CSS selector, find the first matching element.
+// Array.from makes a list; forEach visits its items, find returns a match,
+// filter keeps matching items, and every checks that all items match.
+// In a conditional expression, condition ? A : B chooses A when true and B otherwise.
 const roads = Array.from(document.querySelectorAll('.road')); // Collect all roads in an array so we can loop through them.
 const envelopes = Array.from(document.querySelectorAll('.envelope')); // Collect all envelope buttons in an array.
 const walker = document.getElementById('walker'); // Find the little character on the map.
@@ -301,7 +351,7 @@ const speed = 90; // Walk 90 map units per second.
 const peek = 28; // Show 28 map units as a hint of an unexplored side path.
 const revealSpeed = 280; // Reveal 280 map units of road per second.
 
-roads.forEach(function (road) { // Run this block for each road.
+for (const road of roads) { // Run this block for each road.
   road.length = road.getTotalLength(); // Measure the full length of this SVG path.
   road.unlocked = road.classList.contains('main-road'); // Main roads start unlocked; side roads do not.
   road.shown = road.unlocked ? road.length : 0; // Show the whole main road, or none of a side road yet.
@@ -311,9 +361,8 @@ roads.forEach(function (road) { // Run this block for each road.
   road.edge.setAttribute('class', 'road-edge'); // Apply the outline's CSS styles.
   road.edge.setAttribute('aria-hidden', 'true'); // Keep this decoration out of screen reader output.
   svg.insertBefore(road.edge, roads[0]); // Place the outline behind the colored roads..
-});
-let position = { road: roads[0], distance: 0 };// Road + distance along the way
- // Start at distance zero on the first road.
+}
+let position = { road: roads[0], distance: 0 }; // Start on the first road at distance zero.
 let journey = []; // Keep a list of walking segments; an empty list means no movement.
 
 function parentRoad(road) { // Find the road that leads into this road.
@@ -321,19 +370,20 @@ function parentRoad(road) { // Find the road that leads into this road.
 }
 
 function updatePaths() { // Refresh which parts of the roads and envelopes are visible.
-  roads.forEach(function (road) { // Run this block for each road.
+  for (const road of roads) { // Run this block for each road.
     const parent = parentRoad(road); // Find the road leading into this one.
 
     if (!road.unlocked && parent && parent.shown >= parent.length) { // Only hint at a locked path once its parent is fully visible.
       road.shown = Math.max(road.shown, Math.min(peek, road.length)); // Show at least a short entrance, without going past the road's end.
     }
+    if (road.dataset.continues) road.setAttribute('marker-end', road.shown >= road.length ? 'url(#path-continues)' : 'none'); // Reveal the outward arrow with the full path.
     road.style.visibility = road.shown > 0 ? 'visible' : 'hidden'; // Show this path only if some of its length should be visible.
     road.style.strokeDasharray = road.shown + ' ' + (road.length + 1); // Draw the revealed length, then leave a gap longer than the rest of the road.
     road.edge.style.visibility = road.style.visibility; // Make the cream outline appear or disappear with its road.
     road.edge.style.strokeDasharray = road.style.strokeDasharray; // Give the outline the same revealed length as the road.
     road.setAttribute('tabindex', road.shown > 0 ? '0' : '-1'); // Let Tab reach visible roads, but skip hidden ones.
     road.setAttribute('aria-hidden', road.shown === 0); // Hide fully hidden roads from screen readers too.
-  });
+  }
   envelopes.forEach(function (envelope) { // Run this block for each envelope.
     const road = document.getElementById(envelope.dataset.road); // Find the road named in this envelope's data-road attribute.
     envelope.hidden = road.shown < road.length; // Keep the envelope hidden until its road is fully revealed.
@@ -341,15 +391,19 @@ function updatePaths() { // Refresh which parts of the roads and envelopes are v
   });
 }
 
+let previousWalkerX = null; // Remember the last horizontal position to choose which way to face.
 function placeWalker() { // Move the character's picture to its current road position.
   const point = position.road.getPointAtLength(position.distance); // Get the map coordinates at the character's distance along the road.
+  if (previousWalkerX !== null && journey.length > 0 && Math.abs(point.x - previousWalkerX) > 0.001) {
+    walker.classList.toggle('facing-right', point.x > previousWalkerX); // The original GIF faces left.
+  }
+  previousWalkerX = point.x;
   walker.style.left = point.x / 10 + '%'; // Convert x from the 1000-unit map to a horizontal percentage.
   walker.style.top = point.y / 8.2 + '%'; // Convert y from the 820-unit map to a vertical percentage.
   updateEnvelopeAccess(); // Check which envelopes are now close enough to open.
 }
 
-//Each click does not directly reach the center of the road. 
-//Therefore, this function measures along the road, taking a point every two units and measuring how far it is from the click position respectively, and finally keeping the nearest one.
+// Sample the road every two map units and keep the point nearest the click.
 function nearestPoint(road, x, y, limit) { // Find an approximate closest point on the allowed part of a road.
   let result = { distance: 0, gap: Infinity }; // Start with no good match; any real distance will beat Infinity.
   for (let distance = 0; distance < limit + 2; distance += 2) { // Sample the road every 2 units, including its endpoint.
@@ -378,8 +432,8 @@ function findRoad(x, y) { // Look for a visible road close to a map click.
   return nearest; // Return the selected road position, or null if no road is close enough.
 }
 
-//Sort out the road chain from the starting point to a certain position: Start → the current position of the little person, Start → the new target. 
-//Through the common parts of these two routes, you can know at which fork to change direction.
+// Build the road chain from Start. For example: m1 → west-entry → west-left.
+// goTo compares the old and new chains: return to their last shared road, then follow the new branches.
 function routeFromStart(point) { // Build the chain of roads from the starting point to a given position.
   const route = [{ road: point.road, distance: point.distance }]; // Begin with the road containing that position.
   let parent = parentRoad(point.road); // Find the road just before it.
@@ -390,9 +444,7 @@ function routeFromStart(point) { // Build the chain of roads from the starting p
   return route; // Return the roads in start-to-destination order.
 }
 
-//list the route (list) that the little person should take, unlock the target path, and let it gradually unfold. 
-// Update the position and display status of the target small circle. 
-// Show "On the way." or "Arrival prompt" depending on whether you need to move.
+// Plan the walk, unlock the target path, and update the destination marker and message.
 function goTo(target) { // Plan a new walk to the selected position.
   target.road.unlocked = true; // Allow the selected road to reveal its full length.
   const from = routeFromStart(position); // Get the road chain leading to the character's current position.
@@ -414,6 +466,8 @@ function goTo(target) { // Plan a new walk to the selected position.
   destination.setAttribute('cx', point.x); // Set the destination circle's horizontal coordinate.
   destination.setAttribute('cy', point.y); // Set the destination circle's vertical coordinate.
   destination.toggleAttribute('hidden', journey.length === 0); // Hide the destination marker if there is no walking left to do.
+  walker.classList.toggle('moving', journey.length > 0); // Switch between the walking and idle GIFs.
+  statusText.classList.remove('all-found'); // Keep the walking message simple.
   statusText.textContent = journey.length > 0 ? 'On the way.' : arrivalMessage(); // Show the walking message, or an arrival message if already there.
 }
 
@@ -431,15 +485,13 @@ svg.addEventListener('keydown', function (event) { // Also allow keyboard intera
   }
 });
 
-//Clear the remaining journey, have the little person stop at the current position, and clear the unfinished journey. Hide the target circle.
 function stop() { // Stop walking without resetting discoveries or the character's position.
   journey = []; // Clear the old walking plan.
   destination.setAttribute('hidden', ''); // Hide the destination marker.
+  walker.classList.remove('moving'); // Show the idle GIF when stopped.
 }
 
-//Although the envelope is already displayed, it can only be opened after getting close. It will check each envelope one by one, and two conditions need to be met simultaneously 
-//The little person is on the road to which this envelope belongs. 
-//The distance along the way between the little figure and the envelope stop should not exceed 22 map units.
+// Letters open only on the same road and within 22 map units of their stopping circle.
 function updateEnvelopeAccess() { // Check whether each envelope is close enough to open.
   envelopes.forEach(function (envelope) { // Run this block for each envelope.
     const nearby = position.road.id === envelope.dataset.road && Math.abs(position.distance - envelope.stopDistance) <= 22; // Require the same road and a distance of at most 22 units from its stop.
@@ -449,8 +501,7 @@ function updateEnvelopeAccess() { // Check whether each envelope is close enough
   });
 }
 
-//Read the position of the envelope - convert it to map coordinates - find the road it belongs to - use nearestPoint() to find the position on the road closest to the envelope 
-// - create a small dot button at this position - set the click operations for the dot and the envelope respectively
+// Place each stopping circle at the road point nearest its envelope, then connect their click actions.
 envelopes.forEach(function (envelope) { // Run this block for each envelope.
   const road = document.getElementById(envelope.dataset.road); // Find the road named in this envelope's data-road attribute.
   const x = parseFloat(envelope.style.left) * 10; // Convert the envelope's horizontal percentage to map units.
@@ -471,19 +522,28 @@ envelopes.forEach(function (envelope) { // Run this block for each envelope.
   button.onclick = function () { goTo({ road: road, distance: envelope.stopDistance }); }; // Walk to this envelope's stopping point when its circle is clicked.
   envelope.after(button); // Insert the stop button just after the envelope in the HTML.
   envelope.stopButton = button; // Save a reference so we can update this stop button later.
+  const card = document.getElementById(envelope.dataset.card); // data-card names the matching letter.
+  const video = card.querySelector('video'); // null when this letter contains a photo.
+  // Pause the recording whenever its letter is closed, including with Escape.
+  if (video) card.addEventListener('close', function () { video.pause(); });
   envelope.onclick = function () { // Run this function when the envelope is clicked.
     if (envelope.disabled) return; // Do nothing if the envelope is not available yet.
     stop(); // Stop any remaining movement.
     envelope.querySelector('img').src = 'assets/images/envelope2.png'; // Swap the closed-envelope picture for the opened one.
-    document.getElementById(envelope.dataset.card).showModal(); // Open the dialog named in this envelope's data-card attribute.
+    envelope.classList.add('opened'); // Remember this discovery, even when it is opened again.
+    card.showModal(); // CSS handles the envelope and paper animations.
+    if (video) {
+      video.muted = true; // Keep Live Photo recordings silent.
+      video.currentTime = 0; // Restart on opening; without loop, it plays once.
+      video.play().catch(function () { video.controls = true; }); // catch handles playback failure by showing manual controls.
+    }
+    statusText.textContent = arrivalMessage(); // Refresh the message after a new discovery.
   };
 });
 
-
-//Set up Start/Finish and make them clickable. 1. Place the buttons in the correct positions according to the route coordinates. 
-// 2. Set the button click event. After clicking, call goTo() to go there.
+// Place Start and Finish at the road endpoints and make them walk destinations.
 const firstRoad = roads[0]; // Remember the road containing the start.
-const lastRoad = roads.find(function (road) { return road.dataset.to === 'finish'; }); // Find the road whose end node is named finish.
+const lastRoad = document.getElementById('m5'); // m5 ends at Finish.
 function connectLandmark(id, road, distance) { // Position a Start or Finish button and connect its click action.
   const button = document.getElementById(id); // Find the landmark button by its id.
   const point = road.getPointAtLength(distance); // Get the landmark's exact point on the road.
@@ -494,9 +554,27 @@ function connectLandmark(id, road, distance) { // Position a Start or Finish but
 connectLandmark('start', firstRoad, 0); // Place Start at the beginning of the first road.
 connectLandmark('finish', lastRoad, lastRoad.length); // Place Finish at the end of the last road.
 
+let fireworkPlayed = false; // Celebrate only once during this visit.
+function showFinishFirework() { // Show the celebration once after all letters are found at Finish.
+  if (fireworkPlayed) return;
+  fireworkPlayed = true;
+  const firework = document.getElementById('finish-firework');
+  firework.onload = function () { // Wait until the GIF has loaded before displaying it.
+    firework.hidden = false;
+    setTimeout(function () { firework.hidden = true; }, 6120); // One full round of this GIF.
+  };
+  firework.src = 'assets/gif/firework-once.gif'; // This copy has no looping instruction.
+}
 
 function arrivalMessage() { // Choose what to say when the character stops at a destination.
-  if (position.road === lastRoad && position.distance >= lastRoad.length - 2) return 'You’ve arrived. There’s still time to wander.'; // Use the finish message when we are close to the final endpoint.
+  const allFound = envelopes.every(function (envelope) { return envelope.classList.contains('opened'); });
+  const atFinish = position.road === lastRoad && position.distance >= lastRoad.length - 2;
+  statusText.classList.toggle('all-found', allFound && atFinish);
+  if (atFinish && allFound) {
+    showFinishFirework();
+    return 'You’ve found every little joy I’ve discovered so far.\nThere’s more on campus waiting for you to notice!';
+  }
+  if (atFinish) return 'You’ve arrived. There’s still time to wander.'; // Use the finish message when we are close to the final endpoint.
   if (position.road === firstRoad && position.distance < 2) return 'Back at the beginning. Your discoveries are still here.'; // Use the start message when we are back at the beginning.
   for (const envelope of envelopes) { // Check whether any envelope is available here.
     if (!envelope.hidden && !envelope.disabled) return 'A little moment is waiting.'; // Invite the player to open a visible envelope within reach.
@@ -507,21 +585,19 @@ window.addEventListener('blur', stop); // Stop walking when the browser window l
 document.addEventListener('visibilitychange', stop); // Stop walking when the page's visibility changes, such as switching tabs.
 window.addEventListener('keydown', function (event) { if (event.key === 'Escape') stop(); }); // Stop walking when Escape is pressed.
 
-
-//1. Let the unlocked paths gradually unfold, revealSpeed × seconds,Refresh the visible paths and envelopes if a road grew.
-//2. Advance the position of the little figure according to journey. placeWalker(); Display the new logical location on the map and update the clickable status of nearby envelopes at the same time. 
-//If the entire array of journey is empty: 1. Call stop() to hide the target circle. 2. Call arrivalMessage() to update the arrival prompt.
+// Each animation frame reveals unlocked paths and moves the traveler along the planned segments.
+// requestAnimationFrame supplies milliseconds; elapsed seconds keep speed steady across screens.
 let previousTime = 0; // Remember the previous animation frame's timestamp.
 function animate(time) { // Update road reveals and walking for this animation frame.
   const seconds = Math.min((time - previousTime) / 1000, 0.05); // Convert elapsed milliseconds to seconds, capped at 0.05 to avoid big jumps.
   previousTime = time; // Save this frame's time for the next update.
   let revealing = false; // Start by assuming no road needs a visibility update.
-  roads.forEach(function (road) { // Run this block for each road.
+  for (const road of roads) { // Run this block for each road.
     if (road.unlocked && road.shown < road.length) { // Only extend roads that are unlocked but not fully shown.
       road.shown = Math.min(road.length, road.shown + revealSpeed * seconds); // Reveal a little more based on time, stopping at the road's full length.
       revealing = true; // Remember that at least one road has changed.
     }
-  });
+  }
   if (revealing) updatePaths(); // Refresh the visible paths and envelopes if a road grew.
   if (journey.length > 0) { // Move only when there are planned walking segments left.
     const part = journey[0]; // Work on the first remaining segment.
@@ -543,15 +619,43 @@ updatePaths(); // Set the initial road hints and envelope visibility.
 placeWalker(); // Update the character's position on screen and its access to envelopes.
 requestAnimationFrame(animate); // Ask the browser to run animate on the next animation frame.
 
-const tutorial = document.getElementById('tutorial'); // Find the reusable help card.
-document.getElementById('open-tutorial').onclick = function () { // Let the player reopen help at any time.
-  stop(); // Stop walking while reading the tutorial.
-  tutorial.hidden = false; // Show the small help card inside the map.
+const sidebar = document.getElementById('sidebar');
+const sidebarToggle = document.getElementById('toggle-sidebar');
+const smallScreen = window.matchMedia('(max-width: 1000px)'); // matches follows the CSS screen-size breakpoint.
+// toggle(class, condition) adds a class when true and removes it when false.
+function setSidebar(collapsed) {
+  document.body.classList.toggle('sidebar-collapsed', collapsed);
+  sidebar.inert = collapsed && !smallScreen.matches; // Prevent focus inside the hidden desktop panel.
+  sidebarToggle.setAttribute('aria-expanded', !collapsed);
+  sidebarToggle.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+}
+sidebarToggle.onclick = function () {
+  setSidebar(!document.body.classList.contains('sidebar-collapsed'));
 };
-document.getElementById('close-tutorial').onclick = function () { tutorial.hidden = true; }; // Hide help with the cross.
-document.getElementById('begin-walk').onclick = function () { tutorial.hidden = true; }; // Close help and return to the map.
-// The help card is visible in the HTML each time the page loads.
-
+const desktopBeginWalk = document.getElementById('desktop-begin-walk');
+desktopBeginWalk.onclick = function () {
+  if (bgm.paused) document.getElementById('music-button').click(); // Start music through the existing Music button handler.
+  desktopBeginWalk.hidden = true; // Show this invitation only until it is used.
+  setSidebar(true);
+  sidebarToggle.focus(); // Keep keyboard focus on the visible way to reopen the sidebar.
+};
+const mobileHelp = document.getElementById('mobile-help');
+const mobileHelpButton = document.getElementById('mobile-help-button');
+function showMobileHelp(open) {
+  mobileHelp.hidden = !open; // Show the tutorial when open is true.
+  mobileHelpButton.setAttribute('aria-expanded', open);
+  if (open) stop(); // Pause walking while reading the tutorial.
+}
+mobileHelpButton.onclick = function () { showMobileHelp(mobileHelp.hidden); };
+document.getElementById('close-mobile-help').onclick = function () {
+  showMobileHelp(false); mobileHelpButton.focus();
+};
+document.getElementById('mobile-begin-walk').onclick = function () {
+  if (bgm.paused) document.getElementById('music-button').click(); // Start music when Let's wander is clicked; do not pause music already playing.
+  document.getElementById('close-mobile-help').click(); // Use the same close and focus behavior as the close button.
+};
+smallScreen.addEventListener('change', function () { setSidebar(false); showMobileHelp(false); });
+setSidebar(false); // The title always stays visible on mobile.
   </script>
 </body>
 </html>
